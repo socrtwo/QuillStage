@@ -58,7 +58,7 @@
 
 ## M7 — AI and canvas
 
-- AI tab with the setup wizard (on-device, local server, free tier, paid), the on-device model, and every AI command in COMMANDS-PLAN.md.
+- AI tab with the setup wizard (on-device, local server, free tier, paid), the on-device model, and every AI command in COMMANDS-PLAN.md, including several AIs per request (master or Quaker consensus).
 - Canvas mode: frames, camera path, overview, brainstorm board, board to slides; vertical slide stacks.
 
 ## M8 — Collaboration and stretch goals

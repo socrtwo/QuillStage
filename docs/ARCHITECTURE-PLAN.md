@@ -147,6 +147,14 @@ Tests will build valid fixtures in code, damage them (truncation, flipped bytes,
 
 ## AI
 
+**Several AIs on one request** (same design as QuillPen, QuillGrid and QuillPost; `src/ai/ensemble.ts`):
+the person can choose 2–6 configured providers. In *master* mode every member answers in parallel and
+one chosen AI writes the final answer from the anonymized, shuffled responses. In *Quaker consensus*
+mode a clerk drafts a minute from the members' answers; each member then unites with it, stands aside
+(recorded concern) or blocks (principled objection); the clerk revises the minute for blocks, for up to
+the configured number of rounds, and the outcome (unity, unity with stand-asides, or no unity) is shown
+with the discussion. Only the final answer is ever applied to the presentation.
+
 The AI layer is shared with the suite: a provider registry, an OpenAI-compatible client with streaming, per-provider adapters where needed, and a setup wizard (**AI ▸ Set Up AI**) grouped as *Free · on device*, *Free · your computer* (Ollama, LM Studio), *Free tier*, *Free trial* and *Paid*, which links to each provider's key page, tests the key, and fetches the model list.
 
 - **On-device model:** a small open instruction model run with Transformers.js in a Web Worker (WebGPU when available, WebAssembly otherwise), downloaded once and then offline. Small models are good at rewriting, notes, alt text and outlines; drafting whole decks benefits from a larger local or hosted model, and the wizard says so.
