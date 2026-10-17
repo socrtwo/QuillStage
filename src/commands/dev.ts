@@ -5,7 +5,7 @@ import type { Macro } from '../prefs';
 import { Deck } from '../model/deck';
 import { getCommand } from './registry';
 import { openDialog, toast, confirmDialog, promptDialog } from '../ui/dialog';
-import { download, pickFile, h } from '../ui/dom';
+import { download, pickFile } from '../ui/dom';
 
 async function runMacro(app: App, name: string): Promise<void> {
   const m = app.prefs.macros.find((x) => x.name === name);
@@ -148,4 +148,3 @@ def([
   },
 ]);
 
-export { h };
