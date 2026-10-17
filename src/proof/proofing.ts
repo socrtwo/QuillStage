@@ -1,17 +1,15 @@
 /**
- * Spelling for cell text.
+ * Spelling for slide text.
  *
- * Spreadsheets do not mark misspellings as you type; spelling is checked on demand (Review ▸
- * Spelling, F7), walking the text constants of the selection or the sheet. Words are checked in a
+ * Text being edited is checked as you type by the platform's spell checker (the editing island is
+ * contenteditable); Review ▸ Spelling (F7) walks every paragraph of the slides and notes. Words are checked in a
  * background worker (spell.worker.ts: nspell with the SCOWL English dictionaries, or Hunspell for a
  * downloaded dictionary of another language, see dictionaries.ts).
  *
  * The walk itself (SpellSession) is independent of the worker and the UI: it takes any
- * SpellChecker and reads and writes cell text through the sheet, so it can be tested directly.
+ * SpellChecker and reads and writes paragraph text through a callback, so it can be tested directly.
  */
-import type { Sheet } from '../model/workbook';
-import type { Cell } from '../model/types';
-import { keyRow, keyCol, type Range } from '../model/address';
+import type { Element, Paragraph, Slide } from '../model/types';
 import { installedDictionaries, dictionaryFor, loadDictionary } from './dictionaries';
 
 // --------------------------------------------------------------------------------------------
@@ -78,7 +76,7 @@ export type SpellDialect = 'any' | 'document' | 'en-US' | 'en-GB' | 'en-CA' | 'e
 
 export const SPELL_DIALECTS: { value: SpellDialect; label: string }[] = [
   { value: 'any', label: 'English — all varieties (accept any standard spelling)' },
-  { value: 'document', label: 'English — follow the workbook language' },
+  { value: 'document', label: 'English — follow the presentation language' },
   { value: 'en-US', label: 'English (United States)' },
   { value: 'en-GB', label: 'English (United Kingdom, including Oxford -ize spelling)' },
   { value: 'en-CA', label: 'English (Canada)' },
@@ -103,7 +101,7 @@ export function isEnglish(lang: string | null | undefined): boolean {
 }
 
 /**
- * The dictionary key the worker checks words with for a workbook language: an English variety,
+ * The dictionary key the worker checks words with for a presentation language: an English variety,
  * 'dict:<id>' for a downloaded dictionary, or null when no dictionary covers the language.
  */
 export async function dictionaryKey(lang: string | undefined, pref: SpellDialect | undefined): Promise<string | null> {
@@ -185,57 +183,61 @@ export function wordsIn(text: string, opts: SpellOptions = DEFAULT_SPELL_OPTIONS
 }
 
 // --------------------------------------------------------------------------------------------
-// Cells to check
+// Text to check
 
-export interface SpellTarget { sheet: Sheet; r: number; c: number }
+/** One paragraph of slide text (in a shape, a table cell, or the speaker notes when el is null). */
+export interface SpellTarget { slide: Slide; el: Element | null; para: Paragraph }
 
-/** Text of a checkable cell (a text constant, not a formula), or null. */
-export function cellSpellText(cell: Cell | undefined): string | null {
-  if (!cell || cell.f != null || cell.sp != null) return null;
-  return typeof cell.v === 'string' && /\p{L}/u.test(cell.v) ? cell.v : null;
+export function paraSpellText(p: Paragraph): string | null {
+  const t = p.runs.map((r) => (r.br ? '\n' : r.field ? ' '.repeat(r.text.length) : r.text)).join('');
+  return /\p{L}/u.test(t) ? t : null;
 }
 
 /**
- * Text cells of a sheet in reading order (row by row), limited to the ranges when given, starting
- * at (fromR, fromC) when given (cells before it come last when wrap is true, else are left out).
+ * Paragraphs of the slides in reading order (shapes in z-order, tables row by row, then the notes),
+ * starting at the slide `fromSlide` when given (earlier slides come last when wrap is true).
  */
-export function spellTargets(sheet: Sheet, ranges: Range[] | null, from?: { r: number; c: number }, wrap = true): SpellTarget[] {
-  const keys: number[] = [];
-  const seen = new Set<number>();
-  for (const [k, cell] of sheet.cells) {
-    if (cellSpellText(cell) == null) continue;
-    const r = keyRow(k), c = keyCol(k);
-    if (ranges && !ranges.some((rg) => r >= rg.r1 && r <= rg.r2 && c >= rg.c1 && c <= rg.c2)) continue;
-    if (seen.has(k)) continue;
-    seen.add(k);
-    keys.push(k);
+export function spellTargets(slides: Slide[], opts: { notes?: boolean; fromSlide?: string; wrap?: boolean } = {}): SpellTarget[] {
+  const out: SpellTarget[] = [];
+  const walk = (s: Slide, els: Element[]) => {
+    for (const e of els) {
+      if (e.kind === 'shape' && e.text) for (const p of e.text.paras) out.push({ slide: s, el: e, para: p });
+      else if (e.kind === 'table') for (const r of e.rows) for (const c of r.cells) for (const p of c.text.paras) out.push({ slide: s, el: e, para: p });
+      else if (e.kind === 'group') walk(s, e.children);
+    }
+  };
+  let list = slides;
+  if (opts.fromSlide) {
+    const i = slides.findIndex((s) => s.id === opts.fromSlide);
+    if (i > 0) list = opts.wrap === false ? slides.slice(i) : [...slides.slice(i), ...slides.slice(0, i)];
   }
-  keys.sort((a, b) => a - b);
-  let list = keys.map((k) => ({ sheet, r: keyRow(k), c: keyCol(k) }));
-  if (from) {
-    const i = list.findIndex((t) => t.r > from.r || (t.r === from.r && t.c >= from.c));
-    if (i > 0) list = wrap ? [...list.slice(i), ...list.slice(0, i)] : list.slice(i);
-    else if (i < 0 && !wrap) list = [];
+  for (const s of list) {
+    walk(s, s.elements);
+    if (opts.notes !== false) for (const p of s.notes) out.push({ slide: s, el: null, para: p });
   }
-  return list;
+  return out.filter((t) => paraSpellText(t.para) != null);
 }
 
-/** Replaces text[start, end) in a cell, keeping rich text runs when the change lies inside one run. */
-export function replaceInCell(cell: Cell, start: number, end: number, text: string): Partial<Cell> {
-  const v = String(cell.v ?? '');
-  const next = v.slice(0, start) + text + v.slice(end);
-  if (!cell.rich) return { v: next };
-  let at = 0;
-  const runs = cell.rich.map((r) => ({ ...r }));
-  for (const run of runs) {
-    const a = at, b = at + run.t.length;
-    if (start >= a && end <= b) {
-      run.t = run.t.slice(0, start - a) + text + run.t.slice(end - a);
-      return { v: next, rich: runs };
+/** Replaces text[start, end) of a paragraph, keeping the formatting of the run where the change starts. */
+export function replaceInParagraph(p: Paragraph, start: number, end: number, text: string): void {
+  let pos = 0;
+  let done = false;
+  const runs: Paragraph['runs'] = [];
+  for (const r of p.runs) {
+    const len = r.br ? 1 : r.text.length;
+    const a = pos, b = pos + len;
+    pos = b;
+    if (r.br || b <= start || a >= end) {
+      if (!done && a >= end && start === end && a === start) { runs.push({ ...r, text, br: undefined }); done = true; }
+      runs.push(r);
+      continue;
     }
-    at = b;
+    const keep = r.text.slice(0, Math.max(0, start - a)) + (done ? '' : text) + r.text.slice(Math.max(0, end - a));
+    done = true;
+    if (keep) runs.push({ ...r, text: keep });
   }
-  return { v: next, rich: undefined };
+  if (!done) runs.push({ text });
+  p.runs = runs;
 }
 
 // --------------------------------------------------------------------------------------------
@@ -250,8 +252,8 @@ export interface SpellSessionOptions {
   /** Personal dictionary (lowercase). Add to Dictionary adds to it. */
   dictionary: Set<string>;
   options?: SpellOptions;
-  /** Writes a change into a cell (inside a transaction); returns false when the cell cannot be changed. */
-  write: (t: SpellTarget, patch: Partial<Cell>) => boolean;
+  /** Replaces text[start, end) of a target (inside a transaction); returns false when it cannot be changed. */
+  write: (t: SpellTarget, start: number, end: number, text: string) => boolean;
 }
 
 /**
@@ -269,7 +271,7 @@ export class SpellSession {
 
   constructor(public targets: SpellTarget[], private checker: SpellChecker, private o: SpellSessionOptions) {}
 
-  private text(t: SpellTarget): string | null { return cellSpellText(t.sheet.get(t.r, t.c)); }
+  private text(t: SpellTarget): string | null { return paraSpellText(t.para); }
 
   private async prime(words: string[]): Promise<void> {
     const fresh = [...new Set(words.filter((w) => !this.known.has(w)))];
@@ -278,7 +280,7 @@ export class SpellSession {
     for (const w of fresh) { this.known.add(w); if (bad.has(w)) this.bad.add(w); }
   }
 
-  /** Checks every word of the remaining targets in one batch (faster than cell by cell). */
+  /** Checks every word of the remaining targets in one batch (faster than paragraph by paragraph). */
   async start(): Promise<void> {
     const words: string[] = [];
     for (const t of this.targets) { const tx = this.text(t); if (tx) for (const w of wordsIn(tx, this.o.options)) words.push(w.word); }
@@ -290,7 +292,7 @@ export class SpellSession {
     return this.o.ignored.has(l) || this.o.dictionary.has(l);
   }
 
-  /** Adds targets to the end of the walk (another sheet, or the start of this one). */
+  /** Adds targets to the end of the walk. */
   extend(targets: SpellTarget[]): void { this.targets.push(...targets); }
 
   async next(): Promise<SpellIssue | null> {
@@ -321,9 +323,7 @@ export class SpellSession {
   }
 
   private apply(t: SpellTarget, start: number, end: number, rep: string): boolean {
-    const cell = t.sheet.get(t.r, t.c);
-    if (!cell) return false;
-    const ok = this.o.write(t, replaceInCell(cell, start, end, rep));
+    const ok = this.o.write(t, start, end, rep);
     if (ok) this.changed++;
     return ok;
   }
@@ -348,13 +348,11 @@ export class SpellSession {
     this.changeAllMap.set(this.current.word, rep);
     return this.change(rep);
   }
-  /** Moves past the current cell (after an edit typed into the Not in Dictionary box). */
-  replaceCellText(text: string): boolean {
+  /** Replaces the whole current paragraph (after an edit typed into the Not in Dictionary box). */
+  replaceTargetText(text: string): boolean {
     const c = this.current;
     if (!c) return false;
-    const cell = c.target.sheet.get(c.target.r, c.target.c);
-    if (!cell) return false;
-    const ok = this.o.write(c.target, { v: text, rich: undefined });
+    const ok = this.o.write(c.target, 0, c.text.length, text);
     if (ok) this.changed++;
     this.pos = 0;
     return ok;

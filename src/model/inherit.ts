@@ -145,5 +145,6 @@ export function promptText(deck: Deck, owner: Owner, el: Element): string {
     if (s) return s;
   }
   const t = el.ph?.type;
-  return t === 'title' || t === 'ctrTitle' ? 'Click to add title' : t === 'subTitle' ? 'Click to add subtitle' : t === 'pic' ? 'Click to add picture' : 'Click to add text';
+  const fixed: Record<string, string> = { title: 'Click to add title', ctrTitle: 'Click to add title', subTitle: 'Click to add subtitle', pic: 'Click to add picture', dt: 'Date', ftr: 'Footer', sldNum: '‹#›', hdr: 'Header', chart: 'Click to add chart', tbl: 'Click to add table', media: 'Click to add media' };
+  return (t && fixed[t]) || 'Click to add text';
 }

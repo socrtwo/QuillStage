@@ -40,7 +40,7 @@ const RECOMMEND_ORDER: Record<string, string[]> = {
 };
 
 /** File kinds QuillStage itself opens. */
-export const HANDLED_HERE = ['docx', 'ooxml', 'doc', 'odt', 'rtf', 'html', 'xml', 'txt', 'csv', 'epub', 'ole'];
+export const HANDLED_HERE = ['pptx', 'ooxml', 'ppt', 'odp', 'ole', 'xml', 'txt', 'docx', 'rtf'];
 
 export const DESCRIPTIONS: Record<string, string> = {
   docx: 'Microsoft Word document (DOCX, Office Open XML)', xlsx: 'Microsoft Excel workbook (XLSX)', pptx: 'Microsoft PowerPoint presentation (PPTX)',

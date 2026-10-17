@@ -31,6 +31,8 @@ export interface RenderOptions {
   /** Draw the grid / guides (edit view). */
   grid?: number;
   grayscale?: boolean;
+  /** Pure black and white preview (print preview of black-and-white printers). */
+  blackWhite?: boolean;
 }
 
 let uid = 0;
@@ -74,8 +76,9 @@ export function slideSvg(deck: Deck, owner: Owner, opts: RenderOptions = {}): st
     for (let y = g; y < h; y += g) lines.push(`M0 ${n(y)} H${n(w)}`);
     body.push(`<path d="${lines.join(' ')}" stroke="#8888" stroke-width="0.4" fill="none" pointer-events="none"/>`);
   }
-  const filter = opts.grayscale ? ` filter="url(#${ctx.prefix}gray)"` : '';
-  if (opts.grayscale) ctx.defs.push(`<filter id="${ctx.prefix}gray"><feColorMatrix type="saturate" values="0"/></filter>`);
+  const filter = opts.grayscale || opts.blackWhite ? ` filter="url(#${ctx.prefix}gray)"` : '';
+  if (opts.blackWhite) ctx.defs.push(`<filter id="${ctx.prefix}gray"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncR type="discrete" tableValues="0 1"/><feFuncG type="discrete" tableValues="0 1"/><feFuncB type="discrete" tableValues="0 1"/></feComponentTransfer></filter>`);
+  else if (opts.grayscale) ctx.defs.push(`<filter id="${ctx.prefix}gray"><feColorMatrix type="saturate" values="0"/></filter>`);
   return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${n(w)} ${n(h)}" width="${n(w)}" height="${n(h)}" preserveAspectRatio="xMidYMid meet" class="qs-slide-svg"><defs>${ctx.defs.join('')}</defs><g${filter}>${body.join('')}</g></svg>`;
 }
 

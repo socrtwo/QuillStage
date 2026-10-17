@@ -6,7 +6,7 @@
 // File access is limited to files the user opened or saved through a dialog, or opened the app
 // with, so presentation content cannot use the bridge to read or overwrite arbitrary files.
 'use strict';
-const { app, BrowserWindow, protocol, net, ipcMain, dialog, shell, clipboard, safeStorage, powerSaveBlocker, Menu } = require('electron');
+const { app, BrowserWindow, protocol, net, ipcMain, dialog, shell, clipboard, safeStorage, powerSaveBlocker, Menu, screen } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
 
@@ -278,8 +278,27 @@ function createWindow() {
       spellcheck: false, // QuillStage has its own spelling checker
     },
   });
-  // Links open in the system browser; the window never navigates away from the app.
-  win.webContents.setWindowOpenHandler(({ url }) => { if (safeUrl(url)) void shell.openExternal(url); return { action: 'deny' }; });
+  // Links open in the system browser; the window never navigates away from the app. The one window
+  // the app opens itself is the slide show's audience view (Presenter View): a blank, sandboxed window
+  // the page writes into, placed full screen on another display when there is one.
+  win.webContents.setWindowOpenHandler(({ url, frameName }) => {
+    if (frameName === 'quillstage-audience' && (url === 'about:blank' || url === '')) {
+      const displays = screen.getAllDisplays();
+      const mine = screen.getDisplayMatching(win.getBounds());
+      const other = displays.find((d) => d.id !== mine.id);
+      const b = (other || mine).bounds;
+      return {
+        action: 'allow',
+        overrideBrowserWindowOptions: {
+          x: b.x, y: b.y, width: other ? b.width : Math.round(b.width * 0.6), height: other ? b.height : Math.round(b.height * 0.6),
+          fullscreen: !!other, autoHideMenuBar: true, title: 'QuillStage Slide Show', backgroundColor: '#000000',
+          webPreferences: { contextIsolation: true, sandbox: true, nodeIntegration: false },
+        },
+      };
+    }
+    if (safeUrl(url)) void shell.openExternal(url);
+    return { action: 'deny' };
+  });
   win.webContents.on('will-navigate', (e, url) => { if (!url.startsWith(ORIGIN)) { e.preventDefault(); if (safeUrl(url)) void shell.openExternal(url); } });
   // The page asks before unloading with unsaved presentations: confirm here, as the browser would.
   win.webContents.on('will-prevent-unload', (e) => {

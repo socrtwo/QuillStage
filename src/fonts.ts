@@ -48,7 +48,7 @@ import open_sans_400_italic from '@fontsource/open-sans/files/open-sans-latin-40
 import open_sans_700_normal from '@fontsource/open-sans/files/open-sans-latin-700-normal.woff2?url';
 import open_sans_700_italic from '@fontsource/open-sans/files/open-sans-latin-700-italic.woff2?url';
 
-const FACES: [string, string[], string, string, string][] = [
+export const FACES: [string, string[], string, string, string][] = [
   ['Tinos', ['Times New Roman', 'Times', 'Liberation Serif'], '400', 'normal', tinos_400_normal],
   ['Tinos', ['Times New Roman', 'Times', 'Liberation Serif'], '400', 'italic', tinos_400_italic],
   ['Tinos', ['Times New Roman', 'Times', 'Liberation Serif'], '700', 'normal', tinos_700_normal],
