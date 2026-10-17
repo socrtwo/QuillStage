@@ -4,7 +4,7 @@ import type { App } from '../app';
 import type { ChartElement, Element, GroupElement, Hyperlink, MediaElement, PictureElement, Run, ShapeElement, TableCell, TableElement, ChartType, Paragraph } from '../model/types';
 import { newId } from '../model/deck';
 import { GEOMETRY, SHAPE_GROUPS } from '../model/geometry';
-import { edit, insertElement, newShape, newTextBox, placeNew, selection, applyRun, textTargets } from '../edit/ops';
+import { boxOf, edit, insertElement, newShape, newTextBox, placeNew, selection, applyRun, textTargets } from '../edit/ops';
 import { openDialog, toast, promptDialog, showMenu } from '../ui/dialog';
 import { h, pickFile, readFileAsDataURL } from '../ui/dom';
 import { slideTitle } from '../render/slide';
@@ -88,7 +88,7 @@ export function makeTable(rows: number, cols: number, box: { x: number; y: numbe
 }
 
 export function parseTsv(text: string): { categories: string[]; series: { name: string; values: (number | null)[] }[] } {
-  const rows = text.trim().split(/\r?\n/).map((r) => r.split(/\t|,(?=\S)|;/).map((c) => c.trim()));
+  const rows = text.split(/\r?\n/).filter((l) => l.trim()).map((r) => r.split(/\t|,(?=\S)|;/).map((c) => c.trim()));
   const head = rows[0] || [];
   const body = rows.slice(1);
   const series = head.slice(1).map((name, i) => ({ name: name || `Series ${i + 1}`, values: body.map((r) => { const v = parseFloat((r[i + 1] || '').replace(/[^\d.eE+-]/g, '')); return Number.isFinite(v) ? v : null; }) }));
@@ -459,6 +459,23 @@ def([
       insertElement(app, buildDiagram(app, r.kind, its), 'Insert Diagram');
     },
     menu: () => DIAGRAM_KINDS.map((d) => ({ id: 'insert.diagram', arg: d.id, label: d.label, icon: d.icon })),
+  },
+  {
+    id: 'diagram.fromOutline', label: 'Convert to Diagram', icon: 'schema', tab: 'Home', group: 'Paragraph', kind: 'menu', edits: true, isEnabled: (app) => textTargets(app).length === 1,
+    tip: 'Turn the selected bulleted text into a list, process, cycle, hierarchy, pyramid, matrix or timeline diagram',
+    run: (app, kind?: string) => {
+      const s = textTargets(app)[0];
+      const items = s?.text ? outlineItems(s.text.paras) : [];
+      if (!items.length) { toast('Select a text box or placeholder with bullet points first.'); return; }
+      const g = buildDiagram(app, kind || 'list', items, (() => { const b = boxOf(app, s); return { x: b.x, y: b.y, w: b.w, h: b.h }; })());
+      edit(app, 'Convert to Diagram', (o) => {
+        const i = o.elements.findIndex((e) => e.id === s.id);
+        if (s.ph) { (o.elements[i] as ShapeElement).text = { ...(s.text || { paras: [] }), paras: [{ level: 0, runs: [] }] }; o.elements.push(g); }
+        else o.elements.splice(i, 1, g);
+      });
+      app.tab.ui.select([g.id]);
+    },
+    menu: () => DIAGRAM_KINDS.map((d) => ({ id: 'diagram.fromOutline', arg: d.id, label: d.label, icon: d.icon })),
   },
   {
     id: 'insert.slideZoom', label: 'Slide Zoom', icon: 'zoom_in_map', tab: 'Insert', group: 'Links', edits: true, isEnabled: (app) => app.deck.slides.length > 1,

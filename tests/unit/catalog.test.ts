@@ -5,7 +5,7 @@ import { allCommands, getCommand } from '../../src/commands/registry';
 import { DEFAULT_TABS, BACKSTAGE_ITEMS } from '../../src/ui/ribbonLayout';
 import { QAT_STANDARD, QAT_CHOICES, DEFAULT_QAT, addAllQatChoices } from '../../src/prefs';
 import { plannedIds } from '../../scripts/plan-ids';
-import { catalog } from '../../scripts/gen-catalog';
+import { catalog } from '../../scripts/catalog';
 
 const label = (id: string) => getCommand(id)?.label;
 

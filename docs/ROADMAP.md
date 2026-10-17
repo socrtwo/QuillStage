@@ -1,6 +1,6 @@
 # Roadmap
 
-> **Plan.** QuillStage has no code yet. Milestones are ordered by dependency, not by date. Each milestone ends with a tagged prerelease built for every platform by the release workflow, starting with M1. Command ids refer to [COMMANDS-PLAN.md](COMMANDS-PLAN.md).
+> **Status (0.1.0):** M1 is done; parts of M2–M5 are done as noted below, and [COMMANDS.md](COMMANDS.md) lists every planned command not yet implemented. Milestones are ordered by dependency, not by date. Each milestone ends with a tagged prerelease built for every platform by the release workflow, starting with M1. Command ids refer to [COMMANDS-PLAN.md](COMMANDS-PLAN.md).
 
 ## M0 — Planning (this repository)
 
@@ -8,7 +8,7 @@
 - [ ] Verify the Quick Access Toolbar drop-down choices against installed copies of each desktop version and update the footnotes in QAT.md.
 - [ ] Collect a corpus of openly licensed test decks (.pptx, .odp, .ppt) made with different programs.
 
-## M1 — Shell and model
+## M1 — Shell and model (done)
 
 - Project scaffold: TypeScript, Vite, vitest, Capacitor 8 (Android, iOS), Electron, PWA manifest and service worker.
 - CI (`android.yml`) and Release (`release.yml`) workflows, adapted from QuillGrid.
@@ -19,7 +19,7 @@
 - Native .qsp save and open; autosave drafts, crash recovery, version history and snapshots.
 - A catalog test that compares the registry with COMMANDS-PLAN.md and reports missing commands.
 
-## M2 — Files, show and print
+## M2 — Files, show and print (done except external displays on Android/iOS)
 
 - .pptx import and export (shapes, text, pictures, tables, notes, masters, layouts, themes, transitions, basic animations); .odp import and export; .ppt import.
 - Slide show: navigation, builds, timings, hide slide, custom shows, kiosk mode, black/white screen, pen and laser.

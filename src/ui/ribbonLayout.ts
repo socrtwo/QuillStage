@@ -29,12 +29,12 @@ export const DEFAULT_TABS: RibbonTab[] = [
       { id: 'slides', label: 'Slides', items: ['slide.new', 'slide.reuse', 'insert.slidesFromOutline'] },
       { id: 'tables', label: 'Tables', items: ['insert.table', 'insert.drawTable'] },
       { id: 'images', label: 'Images', items: ['insert.picture', 'insert.screenshot', 'insert.photoAlbum'] },
-      { id: 'illustrations', label: 'Illustrations', items: ['insert.shape', 'insert.icons', 'insert.diagram', 'insert.chart'] },
+      { id: 'illustrations', label: 'Illustrations', items: ['insert.shape', 'insert.diagram', 'insert.chart'] },
       { id: 'links', label: 'Links', items: ['insert.summaryZoom', 'insert.slideZoom', 'insert.link', 'insert.action', 'insert.actionButton'] },
       { id: 'comments', label: 'Comments', items: ['review.newComment'] },
       { id: 'text', label: 'Text', items: ['insert.textBox', 'insert.headerFooter', 'insert.decorativeText', 'insert.dateTime', 'insert.slideNumber', 'insert.codeBlock', 'insert.stickyNote'] },
       { id: 'symbols', label: 'Symbols', items: ['insert.equation', 'insert.symbol', 'insert.emoji'] },
-      { id: 'media', label: 'Media', items: ['insert.video', 'insert.audio', 'insert.recordAudio', 'insert.webEmbed'] },
+      { id: 'media', label: 'Media', items: ['insert.video', 'insert.audio', 'insert.recordAudio'] },
     ],
   },
   {
@@ -78,7 +78,7 @@ export const DEFAULT_TABS: RibbonTab[] = [
   },
   {
     id: 'review', label: 'Review', groups: [
-      { id: 'proofing', label: 'Proofing', items: ['review.spelling', 'review.dictionaries', 'review.thesaurus', 'review.statistics'] },
+      { id: 'proofing', label: 'Proofing', items: ['review.spelling', 'review.dictionaries', 'review.statistics'] },
       { id: 'accessibility', label: 'Accessibility', items: ['review.checkAccessibility', 'review.altText', 'review.readingOrder'] },
       { id: 'insights', label: 'Insights', items: ['review.designCheck', 'review.lookUp'] },
       { id: 'language', label: 'Language', items: ['review.translate', 'review.language'] },
@@ -92,7 +92,7 @@ export const DEFAULT_TABS: RibbonTab[] = [
     id: 'view', label: 'View', groups: [
       { id: 'views', label: 'Presentation Views', items: ['view.normal', 'view.outline', 'view.slideSorter', 'view.notesPage', 'view.reading'] },
       { id: 'masters', label: 'Master Views', items: ['view.slideMaster'] },
-      { id: 'show', label: 'Show', items: ['view.ruler', 'view.gridlines', 'view.smartGuides', 'view.notes', 'view.thumbnails'], launcher: 'view.gridSettings' },
+      { id: 'show', label: 'Show', items: ['view.gridlines', 'view.smartGuides', 'view.notes', 'view.thumbnails'], launcher: 'view.gridSettings' },
       { id: 'zoom', label: 'Zoom', items: ['view.zoom', 'view.fit', 'view.zoomIn', 'view.zoomOut'] },
       { id: 'color', label: 'Color/Grayscale', items: ['view.color', 'view.grayscale', 'view.blackWhite'] },
       { id: 'window', label: 'Window', items: ['view.newWindow', 'view.switchWindow', 'view.fullScreen'] },
@@ -145,7 +145,7 @@ export const DEFAULT_TABS: RibbonTab[] = [
     id: 'shapeFormat', label: 'Shape Format', contextual: (app) => only(app, ['shape', 'group']), accent: '#C2502A', groups: [
       { id: 'insert', label: 'Insert Shapes', items: ['insert.shape', 'shape.change', 'insert.textBox'] },
       { id: 'styles', label: 'Shape Styles', items: ['shape.quickStyle', 'shape.fill', 'shape.outline', 'shape.effects'], launcher: 'shape.formatPane' },
-      { id: 'text', label: 'Decorative Text Styles', items: ['shape.textFill', 'shape.textOutline', 'shape.autofit', 'shape.wrapText', 'shape.textMargins'] },
+      { id: 'text', label: 'Decorative Text Styles', items: ['shape.textFill', 'shape.autofit', 'shape.wrapText', 'shape.textMargins'] },
       { id: 'accessibility', label: 'Accessibility', items: ['review.altText', 'shape.decorative'] },
       { id: 'arrange', label: 'Arrange', items: ['arrange.bringForward', 'arrange.sendBackward', 'home.selectionPane', 'arrange.align', 'arrange.group', 'arrange.rotate'] },
       { id: 'size', label: 'Size', items: ['shape.height', 'shape.width', 'shape.sizeDialog'] },
@@ -187,7 +187,7 @@ export const DEFAULT_TABS: RibbonTab[] = [
     id: 'mediaPlayback', label: 'Playback', contextual: (app) => only(app, ['media']), accent: '#3F8F7A', groups: [
       { id: 'preview', label: 'Preview', items: ['media.play'] },
       { id: 'editing', label: 'Editing', items: ['media.trim', 'media.posterFrame'] },
-      { id: 'options', label: 'Options', items: ['media.volume', 'media.start', 'media.loop', 'media.rewind', 'media.hideWhileNotPlaying', 'media.fullScreen'] },
+      { id: 'options', label: 'Options', items: ['media.volume', 'media.start', 'media.loop'] },
     ],
   },
 ];
