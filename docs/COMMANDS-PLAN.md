@@ -819,7 +819,7 @@ Every command will be usable on the Quick Access Bar, on custom tabs, on a keybo
 | Set Up AI… | Setup | `ai.setup` | wizard: on-device, local server, free tier, paid |
 | Active AI | Setup | `ai.active` | |
 | Providers & Models… | Setup | `ai.providers` | |
-| Several AIs ▸ Single AI / Master Combines Answers / Quaker Consensus | Setup | `ai.ensembleMode` | menu; see the suite's ENSEMBLE spec |
+| Several AIs ▸ Single AI / Master Combines Answers / Quaker Consensus | Setup | `ai.ensembleMode` | menu; see docs/ENSEMBLE.md |
 | Choose AIs… | Setup | `ai.ensembleMembers` | 2–6 providers, master/clerk, rounds |
 | Show AI Discussion | Setup | `ai.showDeliberation` | toggle |
 | AI & Privacy | Setup | `ai.privacy` | |
