@@ -1,10 +1,21 @@
 # QuillStage
 
-An original, open-source presentation app for Android, iOS, Windows, macOS, Linux, ChromeOS and the web whose goal is the same as the rest of the Quill suite: **no missing commands**. QuillStage will give you a familiar slide workflow (outline, slide sorter, masters, transitions, animations, presenter view) and open and save .pptx and .odp files faithfully, then add the best ideas from forty years of presentation software: outline-driven authoring, a zoomable canvas mode, Markdown slides, build-order editing, rehearsal coaching, live polls and Q&A, and an optional AI tab that can run entirely on your device. Every feature is a command, and every command can be put on the Quick Access Bar, on your own tab, on a keyboard shortcut, or in a macro, and found with command search. When a presentation is damaged, QuillStage recovers what it can instead of refusing to open it.
+*Part of the Quill suite: [QuillPen](https://github.com/socrtwo/QuillPen) (documents), [QuillGrid](https://github.com/socrtwo/QuillGrid) (spreadsheets), [QuillPost](https://github.com/socrtwo/QuillPost) (email) and **QuillStage** (presentations).*
 
-> **Status: planning — no code yet.** This repository holds the plan: the feature survey, the command inventory, the intended architecture and the roadmap. Nothing here is built or released. Issues and discussion about the plan are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+An original, open-source presentation app for Android, iOS, Windows, macOS, Linux, ChromeOS and the web whose goal is the same as the rest of the Quill suite: **no missing commands**. QuillStage gives you a familiar slide workflow (outline, slide sorter, masters, transitions, animations, presenter view) and open and save .pptx and .odp files faithfully, then add the best ideas from forty years of presentation software: outline-driven authoring, a zoomable canvas mode, Markdown slides, build-order editing, rehearsal coaching, live polls and Q&A, and an optional AI tab that can run entirely on your device. Every feature is a command, and every command can be put on the Quick Access Bar, on your own tab, on a keyboard shortcut, or in a macro, and found with command search. When a presentation is damaged, QuillStage recovers what it can instead of refusing to open it.
 
-## The plan in brief
+> **Status: first working version (0.1.0, milestone M1 with much of M2–M5).** The app builds for the web, Android, iOS and desktop with the same CI and release workflows as QuillGrid. What works today:
+>
+> - **556 commands**; 464 of the 755 ids in the plan are implemented, and the rest are listed in [docs/COMMANDS.md](docs/COMMANDS.md). A command is registered only when it works.
+> - **Editing:** placeholders inherit from layouts and masters; you type directly on the slide; 90+ preset shapes, pictures, tables, charts, diagrams, media, groups, ink; smart guides and snapping; undo/redo.
+> - **Views:** Normal, Outline (two-way), Slide Sorter with sections, Notes Page, Reading view, Slide Master.
+> - **Show:** builds and transitions including Smooth Morph, presenter view with an audience window (second display on the desktop app), rehearse timings, pen/highlighter/laser, custom shows.
+> - **Files:** .pptx/.pptm/.ppsx/.potx and .odp/.otp/.fodp open and save; .ppt (97–2003) and .docx/.rtf/.txt outlines open; Markdown slides both ways; native .qsp and AES-256 .qspe; PDF, PNG/JPEG/SVG, HTML show and web story export. Damaged files go through the recovery pipeline. See [docs/FORMATS.md](docs/FORMATS.md) and [docs/RECOVERY.md](docs/RECOVERY.md).
+> - **AI tab** with the suite's setup wizard, on-device model and several-AI (master or Quaker consensus) modes. See [docs/AI.md](docs/AI.md).
+>
+> Not yet: video and GIF export, phone remote, live audience polls, recording, canvas mode, 3D models, external displays on Android/iOS. Verified in Chromium and against LibreOffice; not yet tested in PowerPoint itself.
+
+## Features and plan
 
 - **A complete command set.** Every command a desktop presentation program offers, tab by tab (File, Home, Insert, Draw, Design, Transitions, Animations, Slide Show, Record, Review, View, Help, and the contextual Shape, Picture, Table, Chart, Diagram, Media and Ink tabs), plus commands adopted from other presentation tools. See [docs/COMMANDS-PLAN.md](docs/COMMANDS-PLAN.md).
 - **No missing commands.** Commands are data. The ribbon, the Quick Access Bar, custom tabs, context menus, keyboard shortcuts, macros and command search (Alt+Q) all refer to command ids, so anything QuillStage can do can be placed anywhere, including the many commands desktop programs keep out of their tabs.
