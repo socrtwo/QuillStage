@@ -72,3 +72,6 @@
 
 @media (prefers-reduced-motion: reduce) { .qs-stage { transition: none; } }
 @media print { .qs-show, .qs-presenter { display: none !important; } }
+
+/* Design Ideas pane: each preview scales to the pane's width. */
+.qs-idea-img svg { display: block; width: 100%; height: auto; }

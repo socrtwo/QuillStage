@@ -33,8 +33,8 @@ async function preview(app: App): Promise<void> {
   if (!s) return;
   const i = d.slideIndex(s.id);
   const prev = d.slides[i - 1];
-  const W = Math.min(720, innerWidth * 0.8), H = W * d.size.h / d.size.w;
-  const box = h('div', { style: `position:relative;width:${W}px;height:${H}px;overflow:hidden;background:#000` });
+  // Sized by the dialog (not the window) so the preview never runs past the dialog's edge on phones.
+  const box = h('div', { style: `position:relative;width:100%;aspect-ratio:${d.size.w}/${d.size.h};flex:none;overflow:hidden;background:#000` });
   const layer = (sl: Slide | undefined) => { const el = h('div', { style: 'position:absolute;inset:0' }); el.innerHTML = sl ? slideSvg(d, sl, { mode: 'show' }) : ''; el.querySelector('svg')?.setAttribute('style', 'width:100%;height:100%;display:block'); if (!sl) el.style.background = '#000'; return el; };
   const play = async () => {
     box.textContent = '';
@@ -45,7 +45,7 @@ async function preview(app: App): Promise<void> {
     out.remove();
   };
   setTimeout(play, 50);
-  await openDialog({ title: `Preview: ${transitionLabel(s.transition?.type || 'none')}`, content: box, ok: 'Close', cancel: false, buttons: [{ label: 'Play Again', onClick: () => void play() }] });
+  await openDialog({ title: `Preview: ${transitionLabel(s.transition?.type || 'none')}`, wide: true, content: box, ok: 'Close', cancel: false, buttons: [{ label: 'Play Again', onClick: () => void play() }] });
 }
 
 def([

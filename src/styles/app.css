@@ -301,7 +301,7 @@ textarea { width: 100%; resize: vertical; font-family: ui-monospace, "Cousine", 
 .ql-note textarea { font-family: var(--font-ui); }
 
 /* Customize dialogs */
-.ql-customize { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; min-height: 0; flex: 1; }
+.ql-customize { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 10px; flex: 1 0 auto; }
 .ql-cust-col { display: flex; flex-direction: column; gap: 6px; min-height: 0; min-width: 0; }
 .ql-cust-mid { display: flex; flex-direction: column; gap: 6px; justify-content: center; }
 .ql-cust-btn { white-space: nowrap; }
@@ -351,7 +351,7 @@ textarea { width: 100%; resize: vertical; font-family: ui-monospace, "Cousine", 
   .ql-overlay { padding: var(--sat) var(--sar) var(--kb, 0px) var(--sal); align-items: flex-end; }
   .ql-palette-overlay { align-items: flex-start; padding: calc(8px + var(--sat)) calc(8px + var(--sar)) calc(8px + var(--sab)) calc(8px + var(--sal)); }
   .ql-row2 { grid-template-columns: 1fr; }
-  .ql-customize { grid-template-columns: 1fr; }
+  .ql-customize { grid-template-columns: minmax(0, 1fr); }
   /* The middle toolbar keeps its labels (Add All A–Z, Reset… are not guessable from icons) and wraps. */
   .ql-cust-mid { flex-direction: row; flex-wrap: wrap; gap: 6px; }
   .ql-cust-mid .ql-cust-btn { padding: 5px 10px 5px 7px; min-height: 36px; font-size: 12.5px; gap: 3px; }
