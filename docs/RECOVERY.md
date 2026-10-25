@@ -1,6 +1,6 @@
 # Recovering damaged presentations
 
-QuillStage inherits the suite's recovery engine, which descends from the author's tools: byte-level
+Anne's Stage inherits the suite's recovery engine, which descends from the author's tools: byte-level
 ZIP salvage and the ImmortalInflate decoder of
 [Immortal Unzipper / Immortal Zip](https://socrtwo.github.io/Immortal-Zip/), XML healing and strings
 scans from [Word Recovery](https://github.com/socrtwo/wordrecovery-SF), and the S2 File Identifier.

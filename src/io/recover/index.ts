@@ -2,7 +2,7 @@
  * Damaged-presentation recovery.
  *
  * The pipeline follows the author's Word Recovery / Immortal Unzipper design (socrtwo), as in
- * QuillPen and QuillGrid, adapted to presentations. Methods run in order and the candidate deck
+ * Anne's Pen and Anne's Grid, adapted to presentations. Methods run in order and the candidate deck
  * with the most recovered content wins:
  *
  *   a. identify   S2 file identification: the real type regardless of extension, embedded or
@@ -103,7 +103,7 @@ const METHOD_INFO: Record<MethodId, [string, string]> = {
 
 const KIND_DESC: Record<string, string> = {
   pptx: 'PowerPoint presentation (PPTX)', pptm: 'PowerPoint macro-enabled presentation (PPTM)', odp: 'OpenDocument presentation (ODP)', fodp: 'Flat OpenDocument presentation (FODP)',
-  ppt: 'PowerPoint 97-2003 presentation (PPT)', qsp: 'QuillStage presentation', encrypted: 'Password-protected (encrypted) Office file', unknown: 'Unrecognized data',
+  ppt: 'PowerPoint 97-2003 presentation (PPT)', qsp: 'Anne\'s Stage presentation', encrypted: 'Password-protected (encrypted) Office file', unknown: 'Unrecognized data',
 };
 
 const plural = (n: number, w: string) => `${n.toLocaleString('en-US')} ${n === 1 ? w : w + 's'}`;
@@ -528,7 +528,7 @@ export async function recoverPresentation(data: Uint8Array | ArrayBuffer, name: 
       mId.detail = 'This is a password-protected (encrypted) Office file: an encrypted package inside a compound file.';
       report.notes.push('The presentation is encrypted with a password. Open it with the password in the program that created it, remove the password (File > Info > Protect Presentation > Encrypt with Password), and save it again.');
       for (const id of ['open', 'zip', 'xml', 'slides', 'media', 'text', 'ppt', 'odp', 'strings'] as MethodId[]) { const m = M(id); m.detail = 'Not possible: the content is encrypted.'; }
-      report.summary = 'This presentation is password-protected (encrypted); QuillStage cannot decrypt it.';
+      report.summary = 'This presentation is password-protected (encrypted); Anne\'s Stage cannot decrypt it.';
       return finish(report, cands, base);
     }
     if (det.kind === 'other') report.notes.push(`This is not a presentation: it looks like a ${det.id.description}.${report.recommended[0] ? ` ${report.recommended[0].name} may be able to repair it.` : ''}`);

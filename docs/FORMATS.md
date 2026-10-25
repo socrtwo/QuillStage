@@ -1,11 +1,11 @@
 # File formats
 
-QuillStage recognizes files by their **content, not their extension** (`sniffFormat` in
+Anne's Stage recognizes files by their **content, not their extension** (`sniffFormat` in
 `src/io/index.ts`): a misnamed file opens with the right reader, and the person is told that the
 name and the content disagree. Damaged files go through the recovery pipeline automatically
 ([RECOVERY.md](RECOVERY.md)).
 
-This file describes what is implemented now. The longer list of historical formats QuillStage
+This file describes what is implemented now. The longer list of historical formats Anne's Stage
 intends to read is in [FORMATS-PLAN.md](FORMATS-PLAN.md).
 
 ## Summary
@@ -21,9 +21,9 @@ intends to read is in [FORMATS-PLAN.md](FORMATS-PLAN.md).
 | Plain-text outline | .txt | Yes | Yes | `src/io/outline.ts` |
 | Word document as an outline | .docx | Yes | No | `src/io/outline.ts` |
 | RTF outline | .rtf | Yes | Yes | `src/io/outline.ts` |
-| QuillStage presentation | .qsp | Yes | Yes | `src/io/qsp.ts` |
-| Encrypted QuillStage presentation (AES-256-GCM) | .qspe | Yes | Yes | `src/io/qsp.ts` |
-| QuillStage JSON | .json | Yes | Yes | `src/io/qsp.ts` |
+| Anne's Stage presentation | .qsp | Yes | Yes | `src/io/qsp.ts` |
+| Encrypted Anne's Stage presentation (AES-256-GCM) | .qspe | Yes | Yes | `src/io/qsp.ts` |
+| Anne's Stage JSON | .json | Yes | Yes | `src/io/qsp.ts` |
 
 ## PowerPoint (.pptx family)
 
@@ -54,7 +54,7 @@ loop and kiosk show settings; document properties; the VBA project of .pptm.
 - Charts are written with literal data caches and no embedded workbook, so PowerPoint shows and
   formats them but asks for the data before editing it. The chart part read from a file is kept
   in the model (`rawXml`) but is regenerated on save.
-- Animation import maps the common preset effects to QuillStage's effect list; rarer presets fall
+- Animation import maps the common preset effects to Anne's Stage's effect list; rarer presets fall
   back to the nearest effect (usually Fade). Interactive trigger sequences are read; on save they
   are written into the main sequence.
 - The newer 3-D transitions (Vortex, Ripple, Prism…) are read as the closest 2-D effect.
@@ -69,7 +69,7 @@ loop and kiosk show settings; document properties; the VBA project of .pptm.
 
 Import only, from the published [MS-PPT] and [MS-ODRAW] specifications: the compound file is
 read with a bounds-checked, cycle-guarded reader; slides come from the persist directory and the
-slide list in document order. For each slide QuillStage reads the text boxes (title, centered
+slide list in document order. For each slide Anne's Stage reads the text boxes (title, centered
 title, subtitle, body and other text) with their positions, paragraph levels and bullets, the
 pictures (from the blip store or the `Pictures` stream: PNG, JPEG, DIB, TIFF, EMF, WMF, PICT),
 and the speaker notes. Pictures that cannot be placed on a slide are put on a "Recovered
@@ -99,11 +99,11 @@ color on save; bitmap fills are read but saved as solid fills.
 ## Markdown
 
 `---` separates slides; YAML-style front matter sets `size` (16:9 or 4:3), `theme` (one of
-QuillStage's themes by name), `title` and `author`. The first heading is the slide title (a level-1
+Anne's Stage's themes by name), `title` and `author`. The first heading is the slide title (a level-1
 heading alone makes a title or section slide); `-`, `*`, `+` and numbered lists become bullets,
 nested by indentation; `**bold**`, `*italic*`, `~~strike~~`, `` `code` `` and links are kept;
 images become pictures (data: URLs are embedded; other URLs become a labeled placeholder, since
-QuillStage does not fetch them); fenced code becomes a monospace text box; `Note:`, `???` and
+Anne's Stage does not fetch them); fenced code becomes a monospace text box; `Note:`, `???` and
 HTML comments are speaker notes; `<!-- section: Name -->` starts a section. Export writes the
 same conventions (Marp-compatible front matter), embeds pictures as data: URLs, and writes tables
 as Markdown tables.
@@ -124,7 +124,7 @@ as Markdown tables.
 - **.qsp:** a ZIP package with a stored `mimetype` (`application/x-quillstage`), `deck.json` (the
   model) and `media/<id>` entries. Lossless.
 - **.qspe:** the same model encrypted with AES-256-GCM under a PBKDF2-SHA256 key (310,000
-  iterations, random salt and IV), as in QuillPen and QuillGrid. The password is never stored.
+  iterations, random salt and IV), as in Anne's Pen and QuillGrid. The password is never stored.
 - **.json:** the model with media inline (base64), for scripts and diffs.
 
 ## Tests
@@ -133,6 +133,6 @@ as Markdown tables.
 writable format and reads it back; checks that every XML part of the .pptx and .odp packages is
 well-formed, that `[Content_Types].xml` covers every part and that every relationship target
 exists; and reads files written by LibreOffice (`tests/fixtures/deck.*` and `tests/fixtures/lo-rich.*`,
-the latter LibreOffice's own .pptx, .odp and .ppt conversions of a QuillStage deck). During
+the latter LibreOffice's own .pptx, .odp and .ppt conversions of an Anne's Stage deck). During
 development the exported .pptx, .odp and .fodp were also opened and converted by LibreOffice
 headless to confirm they load.

@@ -296,7 +296,7 @@ export async function deckToPdf(deck: Deck, opts: PdfOptions = {}): Promise<Uint
     if (!pdf.pageCount) pdf.page(PW, PH, '');
   }
   const p = deck.data.props;
-  const info: Record<string, string> = { Producer: '(QuillStage)', Creator: '(QuillStage)', CreationDate: pdfDate(Date.now()) };
+  const info: Record<string, string> = { Producer: '(Anne\'s Stage)', Creator: '(Anne\'s Stage)', CreationDate: pdfDate(Date.now()) };
   if (p.title) info.Title = infoString(p.title);
   if (p.author) info.Author = infoString(p.author);
   if (p.subject) info.Subject = infoString(p.subject);

@@ -1,5 +1,5 @@
 /**
- * Text layout for slides. QuillStage breaks lines itself (rather than leaving it to the browser) so
+ * Text layout for slides. Anne's Stage breaks lines itself (rather than leaving it to the browser) so
  * the edit view, thumbnails, the slide show, PNG and PDF export all break lines in the same places.
  * Widths are measured with a canvas; where no canvas exists (tests, workers without OffscreenCanvas)
  * an average-width estimate is used.

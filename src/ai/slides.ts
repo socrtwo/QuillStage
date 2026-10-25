@@ -1,6 +1,6 @@
 /** Prompts and output parsing for the presentation AI features. */
 
-export const SLIDES_SYSTEM = 'You are a presentation assistant inside QuillStage, an offline-first presentation app. Follow the format instructions exactly. Do not add commentary before or after the requested output.';
+export const SLIDES_SYSTEM = 'You are a presentation assistant inside Anne\'s Stage, an offline-first presentation app. Follow the format instructions exactly. Do not add commentary before or after the requested output.';
 
 export interface OutlineSlide { title: string; bullets: string[]; notes?: string }
 

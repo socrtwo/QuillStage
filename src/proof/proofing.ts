@@ -13,7 +13,7 @@ import type { Element, Paragraph, Slide } from '../model/types';
 import { installedDictionaries, dictionaryFor, loadDictionary } from './dictionaries';
 
 // --------------------------------------------------------------------------------------------
-// Worker protocol (same messages as QuillPen's proofing engine)
+// Worker protocol (same messages as Anne's Pen's proofing engine)
 
 let worker: Worker | null = null;
 let workerFailures = 0;

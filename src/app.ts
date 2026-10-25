@@ -1,4 +1,4 @@
-/** QuillStage application core: presentation tabs, command execution, recording, autosave. */
+/** Anne's Stage application core: presentation tabs, command execution, recording, autosave. */
 import { isSafeExternalUrl } from './util/sanitize';
 import { Deck } from './model/deck';
 import type { Element, Layout, Master, Slide } from './model/types';
@@ -142,7 +142,7 @@ export class App {
     this.ui.tabsChanged();
     tab.ui.layout();
     this.refresh();
-    document.title = `${tab.displayName}${tab.dirty ? ' •' : ''} – QuillStage`;
+    document.title = `${tab.displayName}${tab.dirty ? ' •' : ''} – Anne\'s Stage`;
   }
 
   closeTab(tab: DeckTab): void {
@@ -171,7 +171,7 @@ export class App {
     // Keep the current slide valid after deletions and undo.
     if (!tab.deck.slide(tab.current)) tab.current = tab.deck.slides[Math.min(tab.deck.slides.length - 1, 0)]?.id || '';
     tab.slideSel = tab.slideSel.filter((id) => tab.deck.slide(id));
-    if (!tab.dirty) { tab.dirty = true; this.ui.tabsChanged(); document.title = `${tab.displayName} • – QuillStage`; }
+    if (!tab.dirty) { tab.dirty = true; this.ui.tabsChanged(); document.title = `${tab.displayName} • – Anne\'s Stage`; }
     this.scheduleAutosave();
     tab.ui.invalidate();
     this.refresh();

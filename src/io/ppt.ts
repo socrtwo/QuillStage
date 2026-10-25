@@ -239,7 +239,7 @@ function paragraphsFrom(text: string, pf?: PfRun[]): Paragraph[] {
 export async function importPpt(data: Uint8Array): Promise<PptImportResult> {
   const cfb = openCfb(data);
   if (!cfb) throw new Error('This is not a PowerPoint 97-2003 file (no compound file header).');
-  if (cfb.find('EncryptedSummary') || cfb.find('EncryptionInfo')) throw new Error('This presentation is encrypted with a password; QuillStage cannot decrypt it.');
+  if (cfb.find('EncryptedSummary') || cfb.find('EncryptionInfo')) throw new Error('This presentation is encrypted with a password; Anne\'s Stage cannot decrypt it.');
   const doc = cfb.read('PowerPoint Document');
   if (!doc || !doc.length) throw new Error('This compound file has no PowerPoint Document stream.');
   const warnings: string[] = [];

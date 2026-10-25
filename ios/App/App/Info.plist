@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>QuillStage</string>
+	<string>Anne's Stage</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -43,7 +43,7 @@
       </array>
     </dict>
 	</dict>
-	<!-- File types QuillStage can open ("Open in" / Share sheet / Files app). -->
+	<!-- File types Anne's Stage can open ("Open in" / Share sheet / Files app). -->
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -101,7 +101,7 @@
 		</dict>
 		<dict>
 			<key>CFBundleTypeName</key>
-			<string>QuillStage Presentation</string>
+			<string>Anne's Stage Presentation</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSHandlerRank</key>
@@ -297,14 +297,14 @@
 			</dict>
 		</dict>
 	</array>
-	<!-- Formats QuillStage defines. -->
+	<!-- Formats Anne's Stage defines. -->
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
 			<key>UTTypeIdentifier</key>
 			<string>io.github.socrtwo.quillstage.qsp</string>
 			<key>UTTypeDescription</key>
-			<string>QuillStage Presentation</string>
+			<string>Anne's Stage Presentation</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
@@ -326,7 +326,7 @@
 			<key>UTTypeIdentifier</key>
 			<string>io.github.socrtwo.quillstage.qspe</string>
 			<key>UTTypeDescription</key>
-			<string>Encrypted QuillStage Presentation</string>
+			<string>Encrypted Anne's Stage Presentation</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>

@@ -292,7 +292,7 @@ export class Deck {
   }
 
   static fromJSON(j: any): Deck {
-    if (!j || typeof j !== 'object' || !j.data || !Array.isArray(j.data.slides)) throw new Error('Not a QuillStage presentation');
+    if (!j || typeof j !== 'object' || !j.data || !Array.isArray(j.data.slides)) throw new Error('Not an Anne\'s Stage presentation');
     const d = new Deck(normalizeData(j.data));
     d.media = j.media && typeof j.media === 'object' ? j.media : {};
     return d;

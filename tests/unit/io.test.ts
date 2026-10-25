@@ -227,7 +227,7 @@ describe('odp', () => {
   });
 });
 
-describe('files LibreOffice wrote from a QuillStage deck', () => {
+describe('files LibreOffice wrote from an Anne\'s Stage deck', () => {
   it('reads its .pptx: slides, notes, shapes, tables, pictures, groups, hidden slides and transitions', async () => {
     const { deck, recovery } = await importDeck(readFileSync('tests/fixtures/lo-rich.pptx'), 'lo-rich.pptx');
     expect(recovery).toBeUndefined();
