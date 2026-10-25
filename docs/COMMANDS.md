@@ -1,6 +1,6 @@
-# QuillStage Command Reference
+# Anne's Stage Command Reference
 
-QuillStage ships **556 commands**. Every one can be placed on the Quick Access Bar, added to a custom tab, bound to a keyboard shortcut, recorded in a macro, or found with command search (Alt+Q).
+Anne's Stage ships **556 commands**. Every one can be placed on the Quick Access Bar, added to a custom tab, bound to a keyboard shortcut, recorded in a macro, or found with command search (Alt+Q).
 
 250 of them are "Commands Not in the Tabs" — reachable through the Quick Access Bar chooser, Customize Tabs, the command search, or menus — so nothing the app can do is hidden.
 
@@ -38,7 +38,9 @@ This file is generated from the source by `npm run catalog`; a unit test fails w
 | Close | Close | Ctrl+w, Ctrl+F4 | `file.close` | not in tabs |
 | Close All | Close |  | `file.closeAll` | not in tabs |
 | Exit | Close |  | `file.exit` | not in tabs |
-| Export as Encrypted QuillStage Presentation | Export |  | `file.export.qspe` | not in tabs |
+| Export as Anne's Stage JSON | Export |  | `file.export.json` | not in tabs |
+| Export as Anne's Stage Presentation | Export |  | `file.export.qsp` | not in tabs |
+| Export as Encrypted Anne's Stage Presentation | Export |  | `file.export.qspe` | not in tabs |
 | Export as Flat OpenDocument Presentation | Export |  | `file.export.fodp` | not in tabs |
 | Export as Markdown Slides | Export |  | `file.export.md` | not in tabs |
 | Export as OpenDocument Presentation | Export |  | `file.export.odp` | not in tabs |
@@ -48,8 +50,6 @@ This file is generated from the source by `npm run catalog`; a unit test fails w
 | Export as PowerPoint Presentation | Export |  | `file.export.pptx` | not in tabs |
 | Export as PowerPoint Show | Export |  | `file.export.ppsx` | not in tabs |
 | Export as PowerPoint Template | Export |  | `file.export.potx` | not in tabs |
-| Export as QuillStage JSON | Export |  | `file.export.json` | not in tabs |
-| Export as QuillStage Presentation | Export |  | `file.export.qsp` | not in tabs |
 | Export as Rich Text Outline | Export |  | `file.export.rtf` | not in tabs |
 | Export Handouts PDF | Export |  | `file.export.handoutsPdf` | not in tabs |
 | Export HTML Show | Export |  | `file.export.htmlShow` | not in tabs; inspired by S5 and reveal.js |
@@ -286,10 +286,10 @@ This file is generated from the source by `npm run catalog`; a unit test fails w
 | Apply Theme to Selected Slides | Themes |  | `design.applyThemeSelected` | not in tabs |
 | Browse for Themes | Themes |  | `design.browseThemes` |  |
 | Save Current Theme | Themes |  | `design.saveTheme` |  |
+| Theme: Anne's Office | Themes |  | `design.theme.anne's office` | not in tabs |
 | Theme: Archive | Themes |  | `design.theme.archive` | not in tabs |
 | Theme: Meadow | Themes |  | `design.theme.meadow` | not in tabs |
 | Theme: Paper | Themes |  | `design.theme.paper` | not in tabs |
-| Theme: Quill | Themes |  | `design.theme.quill` | not in tabs |
 | Theme: Slate | Themes |  | `design.theme.slate` | not in tabs |
 | Theme: Studio | Themes |  | `design.theme.studio` | not in tabs |
 | Themes | Themes |  | `design.theme` | has options menu |
@@ -562,7 +562,7 @@ This file is generated from the source by `npm run catalog`; a unit test fails w
 
 | Command | Group | Shortcut | ID | Notes |
 |---|---|---|---|---|
-| About QuillStage | Help |  | `help.about` |  |
+| About Anne's Stage | Help |  | `help.about` |  |
 | Check for Updates | Help |  | `help.updates` | not in tabs |
 | Command Reference | Help |  | `help.commandReference` |  |
 | Help | Help | F1 | `help.help` |  |

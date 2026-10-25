@@ -419,7 +419,7 @@ export interface DeckData {
   firstNumber?: number;
   /** VBA project (.pptm), kept byte-for-byte as base64. */
   vba?: string;
-  /** Parts of the original package QuillStage does not model, written back when still valid. */
+  /** Parts of the original package Anne's Stage does not model, written back when still valid. */
   keep?: Record<string, string>;
   finalMarked?: boolean;
 }

@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# Build the QuillStage Android APK on an Android device with Termux (https://termux.dev, the
+# Build the Anne's Stage Android APK on an Android device with Termux (https://termux.dev, the
 # F-Droid or GitHub build; the Play Store build is outdated).
 #
 #   curl -fsSLO https://raw.githubusercontent.com/socrtwo/QuillStage/main/scripts/termux-build.sh

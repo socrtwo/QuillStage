@@ -394,7 +394,7 @@ def([
       const c = app.clip;
       const opts = [
         ...(c?.kind === 'slides' ? [{ value: 'edit.pasteDestTheme', label: 'Slides using the destination theme' }, { value: 'edit.pasteKeepSource', label: 'Slides keeping their source formatting' }] : []),
-        ...(c?.kind === 'elements' ? [{ value: 'edit.pasteDestTheme', label: 'QuillStage objects' }, { value: 'edit.pastePicture', label: 'Picture (SVG)' }] : []),
+        ...(c?.kind === 'elements' ? [{ value: 'edit.pasteDestTheme', label: 'Anne\'s Stage objects' }, { value: 'edit.pastePicture', label: 'Picture (SVG)' }] : []),
         { value: 'edit.pasteText', label: 'Unformatted text' },
       ];
       const r = await openDialog({ title: 'Paste Special', fields: [{ key: 'as', label: 'As', type: 'radio', options: opts, value: opts[0].value }] });

@@ -91,7 +91,7 @@ def([
       const r = await openDialog({ title: m ? `Edit Macro: ${m.name}` : 'New Macro', wide: true, fields: [
         { key: 'name', label: 'Name', type: 'text', value: m?.name || `Macro${ms.length + 1}` },
         { key: 'desc', label: 'Description', type: 'text', value: m?.description || '' },
-        { key: 'steps', label: 'Steps', type: 'textarea', rows: 14, value: text, help: 'Find command ids in Help ▸ Command Reference or the Customize dialogs. Macros run QuillStage commands only; they cannot reach files, the network or other apps.' },
+        { key: 'steps', label: 'Steps', type: 'textarea', rows: 14, value: text, help: 'Find command ids in Help ▸ Command Reference or the Customize dialogs. Macros run Anne\'s Stage commands only; they cannot reach files, the network or other apps.' },
       ], validate: (v) => {
         for (const [i, line] of String(v.steps).split('\n').entries()) {
           const t = line.trim(); if (!t || t.startsWith('#')) continue;
@@ -110,14 +110,14 @@ def([
   },
   {
     id: 'dev.macroSecurity', label: 'Macro Security', icon: 'admin_panel_settings', tab: 'Developer', group: 'Code', noRecord: true, edits: false,
-    run: async () => { await openDialog({ title: 'Macro Security', ok: 'Close', cancel: false, fields: [{ key: 'i', type: 'info', html: '<p><b>QuillStage macros are lists of QuillStage commands.</b> They can do only what you could do with the ribbon: format, insert, change slides. They cannot run code, read or write files on their own, or use the network.</p><p><b>VBA macros</b> in .pptm files are kept byte-for-byte when you save as .pptm, and can be viewed (Developer ▸ View VBA Project), but are <b>never run</b>.</p>' }] }); },
+    run: async () => { await openDialog({ title: 'Macro Security', ok: 'Close', cancel: false, fields: [{ key: 'i', type: 'info', html: '<p><b>Anne\'s Stage macros are lists of Anne\'s Stage commands.</b> They can do only what you could do with the ribbon: format, insert, change slides. They cannot run code, read or write files on their own, or use the network.</p><p><b>VBA macros</b> in .pptm files are kept byte-for-byte when you save as .pptm, and can be viewed (Developer ▸ View VBA Project), but are <b>never run</b>.</p>' }] }); },
   },
   {
     id: 'dev.viewVba', label: 'View VBA Project', icon: 'data_object', tab: 'Developer', group: 'Code', noRecord: true, edits: false, isEnabled: (app) => !!app.deck.data.vba,
     tip: 'Show the modules in this presentation\'s VBA project (read-only; never run)',
     run: async (app) => {
       const v = vbaSummary(app.deck.data.vba!);
-      await openDialog({ title: 'VBA Project (read-only)', ok: 'Close', cancel: false, fields: [{ key: 'i', type: 'info', html: `<p>${(v.bytes / 1024).toFixed(1)} KB. QuillStage keeps this project when saving as .pptm and never runs it.</p><p><b>Modules and streams:</b> ${v.names.map((n) => n.replace(/</g, '&lt;')).join(', ') || '(none found)'}</p>` }] });
+      await openDialog({ title: 'VBA Project (read-only)', ok: 'Close', cancel: false, fields: [{ key: 'i', type: 'info', html: `<p>${(v.bytes / 1024).toFixed(1)} KB. Anne's Stage keeps this project when saving as .pptm and never runs it.</p><p><b>Modules and streams:</b> ${v.names.map((n) => n.replace(/</g, '&lt;')).join(', ') || '(none found)'}</p>` }] });
     },
   },
   {
@@ -138,12 +138,12 @@ def([
   },
   {
     id: 'dev.importJson', label: 'Import Presentation JSON', icon: 'upload', tab: 'Developer', group: 'Data', noRecord: true, edits: false,
-    tip: 'Open a QuillStage presentation JSON file in a new tab',
+    tip: 'Open an Anne\'s Stage presentation JSON file in a new tab',
     run: async (app) => {
       const f = (await pickFile('.json,application/json'))[0];
       if (!f) return;
       try { const d = Deck.fromJSON(JSON.parse(await f.text())); app.createTab(d, { title: f.name.replace(/\.json$/i, ''), fileName: f.name, format: 'json' }); }
-      catch (e: any) { toast(`Not a QuillStage presentation: ${e?.message || e}`); }
+      catch (e: any) { toast(`Not an Anne's Stage presentation: ${e?.message || e}`); }
     },
   },
 ]);

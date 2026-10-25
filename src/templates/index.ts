@@ -32,7 +32,7 @@ function decorate(d: Deck, style: number): void {
   const shape = (x: number, y: number, ww: number, hh: number, f: Fill, geom = 'rect', extra: Partial<ShapeElement> = {}): Element => ({ id: newId('dec'), kind: 'shape', geom, name: 'Decoration', x, y, w: ww, h: hh, fill: f, line: { fill: { type: 'none' } }, ...extra });
   const title = d.data.layouts.find((l) => l.type === 'title')!;
   switch (style) {
-    case 0: // Quill: accent band at the left, thin rule under the title
+    case 0: // Anne's Office: accent band at the left, thin rule under the title
       m.elements.push(shape(0, 0, 14, h, { type: 'solid', color: 'accent1' }), shape(66, 134, 120, 3, { type: 'solid', color: 'accent1' }));
       title.elements.push(shape(0, h * 0.62, w, h * 0.38, { type: 'solid', color: { s: 'accent1', lum: 0.85 } }));
       break;

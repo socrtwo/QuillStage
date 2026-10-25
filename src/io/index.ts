@@ -20,9 +20,9 @@ export const FORMATS: FormatDef[] = [
   { id: 'txt', label: 'Plain-Text Outline', ext: ['txt'], mime: 'text/plain', canImport: true, canExport: true },
   { id: 'docx', label: 'Word Document Outline', ext: ['docx'], mime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', canImport: true, canExport: false },
   { id: 'rtf', label: 'Rich Text Outline', ext: ['rtf'], mime: 'application/rtf', canImport: true, canExport: true },
-  { id: 'qsp', label: 'QuillStage Presentation', ext: ['qsp'], mime: 'application/x-quillstage', canImport: true, canExport: true },
-  { id: 'qspe', label: 'Encrypted QuillStage Presentation', ext: ['qspe'], mime: 'application/x-quillstage-encrypted', canImport: true, canExport: true },
-  { id: 'json', label: 'QuillStage JSON', ext: ['json'], mime: 'application/json', canImport: true, canExport: true },
+  { id: 'qsp', label: 'Anne\'s Stage Presentation', ext: ['qsp'], mime: 'application/x-quillstage', canImport: true, canExport: true },
+  { id: 'qspe', label: 'Encrypted Anne\'s Stage Presentation', ext: ['qspe'], mime: 'application/x-quillstage-encrypted', canImport: true, canExport: true },
+  { id: 'json', label: 'Anne\'s Stage JSON', ext: ['json'], mime: 'application/json', canImport: true, canExport: true },
 ];
 
 export function formatById(id: string): FormatDef | undefined {
@@ -123,7 +123,7 @@ async function importNormal(data: Uint8Array, fmt: string, opts: { password?: st
       return { deck: await importQspe(data, opts.password), warnings: [] };
     }
   }
-  throw new Error(`QuillStage cannot open this kind of file${fmt ? ` (${fmt})` : ''}.`);
+  throw new Error(`Anne's Stage cannot open this kind of file${fmt ? ` (${fmt})` : ''}.`);
 }
 
 /**
@@ -159,7 +159,7 @@ export async function importDeck(data: Uint8Array, name: string, opts: { repair?
 
 export async function exportDeck(deck: Deck, format: string, opts: { password?: string } = {}): Promise<{ data: Uint8Array; mime: string; ext: string }> {
   const def = formatById(format);
-  if (!def || !def.canExport) throw new Error(`QuillStage cannot save as ${format}.`);
+  if (!def || !def.canExport) throw new Error(`Anne's Stage cannot save as ${format}.`);
   const out = (data: Uint8Array) => ({ data, mime: def.mime, ext: def.ext[0] });
   const enc = (s: string) => new TextEncoder().encode(s);
   switch (format) {
@@ -197,7 +197,7 @@ export async function exportDeck(deck: Deck, format: string, opts: { password?: 
       return out(exportJson(deck));
     }
   }
-  throw new Error(`QuillStage cannot save as ${format}.`);
+  throw new Error(`Anne's Stage cannot save as ${format}.`);
 }
 
 export type { RecoveryReport };

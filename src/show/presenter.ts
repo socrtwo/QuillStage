@@ -4,7 +4,7 @@
  * the next slide or build, speaker notes, timer, clock and tools in the main window. Pen, highlighter
  * and laser used on the presenter's slide appear on the audience screen.
  *
- * The show also announces each frame on BroadcastChannel('quillstage-show'), so any QuillStage page
+ * The show also announces each frame on BroadcastChannel('quillstage-show'), so any Anne's Stage page
  * opened with ?audience can follow it (a second browser tab on another screen, or a cast receiver).
  */
 import type { App } from '../app';
@@ -42,7 +42,7 @@ function openAudienceWindow(): Window | null {
   if (!w || w.closed) return null;
   const d = w.document;
   d.open();
-  d.write(`<!doctype html><html><head><meta charset="utf-8"><base href="${location.href.replace(/"/g, '&quot;')}"><title>QuillStage – Audience</title></head><body style="margin:0;background:#000;overflow:hidden"></body></html>`);
+  d.write(`<!doctype html><html><head><meta charset="utf-8"><base href="${location.href.replace(/"/g, '&quot;')}"><title>Anne's Stage – Audience</title></head><body style="margin:0;background:#000;overflow:hidden"></body></html>`);
   d.close();
   // Carry over the app's fonts and icon font so text and toolbar icons match.
   for (const node of document.head.querySelectorAll('style, link[rel="stylesheet"]')) d.head.appendChild(d.importNode(node, true));
@@ -318,7 +318,7 @@ class PresenterView {
       const mx = window.screenX, my = window.screenY, mw = window.outerWidth, mh = window.outerHeight;
       a.moveTo(mx, my); a.resizeTo(mw, mh);
       window.moveTo(ax, ay); window.resizeTo(aw, ah);
-    } catch { toast('This browser does not let QuillStage move its windows; drag the audience window to the other display.'); }
+    } catch { toast('This browser does not let Anne\'s Stage move its windows; drag the audience window to the other display.'); }
   }
 
   private close(): void {
@@ -334,7 +334,7 @@ class PresenterView {
 
 /**
  * Follows a show running in another tab or window: shows each frame sent on the show channel. Used by
- * a QuillStage page opened with ?audience. Returns a function that stops following.
+ * an Anne's Stage page opened with ?audience. Returns a function that stops following.
  */
 export function followBroadcast(root: HTMLElement): () => void {
   ensureCss(document);
@@ -351,7 +351,7 @@ export function followBroadcast(root: HTMLElement): () => void {
     const m = ev.data;
     if (!m || m.type !== 'frame' || typeof m.svg !== 'string') return;
     wrap.style.setProperty('--qs-ratio', String(m.ratio || 16 / 9));
-    // The markup comes from QuillStage's own renderer in a same-origin window; parse it as SVG
+    // The markup comes from Anne's Stage's own renderer in a same-origin window; parse it as SVG
     // (scripts in SVG parsed this way do not run) and drop anything that is not drawing.
     const doc = new DOMParser().parseFromString(m.svg, 'image/svg+xml');
     doc.querySelectorAll('script, foreignObject').forEach((n) => n.remove());

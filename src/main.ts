@@ -1,4 +1,4 @@
-/** QuillStage entry point. */
+/** Anne's Stage entry point. */
 import 'material-symbols/outlined.css';
 import './styles/app.css';
 import './styles/show.css';
@@ -73,7 +73,7 @@ function boot(): void {
             if (!s.active) s.active = 'openrouter';
           });
         });
-        if (ok) toast('Signed in to OpenRouter and saved the key. You can close this tab and return to QuillStage.', { ms: 15000 });
+        if (ok) toast('Signed in to OpenRouter and saved the key. You can close this tab and return to Anne\'s Stage.', { ms: 15000 });
       } catch (e: any) {
         toast(`OpenRouter sign-in did not complete: ${e?.message || e}`, { ms: 10000 });
       }

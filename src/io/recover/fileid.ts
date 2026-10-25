@@ -39,7 +39,7 @@ const RECOMMEND_ORDER: Record<string, string[]> = {
   xml: ['xmltrncatorfixr'],
 };
 
-/** File kinds QuillStage itself opens. */
+/** File kinds Anne's Stage itself opens. */
 export const HANDLED_HERE = ['pptx', 'ooxml', 'ppt', 'odp', 'ole', 'xml', 'txt', 'docx', 'rtf'];
 
 export const DESCRIPTIONS: Record<string, string> = {

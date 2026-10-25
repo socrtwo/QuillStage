@@ -166,7 +166,7 @@ unzip damaged.pptx 'ppt/media/*' -d pictures</code></pre>
     <p>PowerPoint for Android: open the presentation, … menu &gt; <b>History</b>. Google Slides/Drive and OneDrive keep versions too.</p>
     <h3>2. Trash and recently deleted</h3>
     <p>Google Drive &gt; <b>Trash</b>, OneDrive &gt; <b>Recycle bin</b>, and the Files app's trash keep deleted files for about 30 days.</p>
-    <h3>3. QuillStage's own copies</h3>
+    <h3>3. Anne's Stage's own copies</h3>
     <p>Open &gt; Recent keeps a cached copy of each file you opened here, and unsaved drafts are kept automatically.</p>
     <h3>4. Online viewers</h3>
     <p>${link('https://www.office.com/launch/powerpoint', 'PowerPoint for the web')} and ${link('https://slides.google.com/', 'Google Slides')} sometimes open what desktop apps refuse.</p>`],
@@ -175,7 +175,7 @@ unzip damaged.pptx 'ppt/media/*' -d pictures</code></pre>
     <h3>2. Files &gt; Recently Deleted</h3><p>Files keeps deleted items for about 30 days.</p>
     <h3>3. Online viewers</h3><p>${link('https://www.office.com/launch/powerpoint', 'PowerPoint for the web')} · ${link('https://slides.google.com/', 'Google Slides')}</p>`],
   tools: ['More S2 recovery tools', `
-    <p>Free tools by the author of QuillStage's recovery engine, each specialized for one kind of damage:</p>
+    <p>Free tools by the author of Anne's Stage's recovery engine, each specialized for one kind of damage:</p>
     <ul>
       <li>${link('https://socrtwo.github.io/pptxrecovery-SF/', 'PPTX Recovery')} · ${link('https://socrtwo.github.io/savvyoffice-SF/', 'Savvy Repair for Microsoft Office')} · ${link('https://socrtwo.github.io/coffice2txt-SF/', 'Coffice2txt')}</li>
       <li>${link('https://socrtwo.github.io/Immortal-Zip/', 'Immortal Zip')} · ${link('https://socrtwo.github.io/xmltrncatorfixr-SF/app/', 'XML Truncator-Fixer')} · ${link('https://socrtwo.github.io/Universal-File-Repair-Tool/', 'Universal File Repair Tool')}</li>
@@ -208,7 +208,7 @@ export async function showManualRecovery(actions: ReportActions = {}): Promise<v
     const a = (e.target as HTMLElement).closest('a[data-external]') as HTMLAnchorElement | null;
     if (a) { e.preventDefault(); openExternal(a.href); }
   });
-  const intro = h('p', { class: 'ql-help' }, 'QuillStage can try every recovery method on a damaged presentation (PPTX, PPTM, PPSX, PPT, ODP or FODP) or on any file that may hold slides, text or pictures: pick it with "Recover a file…". The steps below find other copies of the file.');
+  const intro = h('p', { class: 'ql-help' }, 'Anne\'s Stage can try every recovery method on a damaged presentation (PPTX, PPTM, PPSX, PPT, ODP or FODP) or on any file that may hold slides, text or pictures: pick it with "Recover a file…". The steps below find other copies of the file.');
   content.append(intro, tabs, pane);
   show(guess);
   await openDialog({

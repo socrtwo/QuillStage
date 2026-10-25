@@ -1,6 +1,6 @@
 {
-  "name": "QuillStage",
-  "short_name": "QuillStage",
+  "name": "Anne's Stage",
+  "short_name": "Anne's Stage",
   "description": "An open-source presentation app that opens and saves PowerPoint, OpenDocument and Markdown slides, with a complete, customizable command library.",
   "id": "./",
   "start_url": "./",
