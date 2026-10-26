@@ -142,7 +142,7 @@ function markSaved(app: App, tab: DeckTab, version: number) {
   tab.saved = Date.now();
   if (tab.deck.version === version) { tab.dirty = false; kvDel('draft:' + tab.id); } else app.scheduleAutosave();
   app.ui.tabsChanged();
-  document.title = `${tab.displayName}${tab.dirty ? ' •' : ''} – QuillStage`;
+  document.title = `${tab.displayName}${tab.dirty ? ' •' : ''} – Anne\'s Stage`;
 }
 
 /** Saves bytes produced by an export with the system save dialog. */
@@ -420,7 +420,7 @@ def([
   },
   {
     id: 'file.email', label: 'Email', icon: 'attach_email', tab: 'Backstage', group: 'Share', noRecord: true,
-    tip: 'Send the presentation as an attachment (uses the system share sheet, which includes your mail app and QuillPost when installed)',
+    tip: 'Send the presentation as an attachment (uses the system share sheet, which includes your mail app and Anne\'s Post when installed)',
     run: async (app) => { const out = await exportDeck(app.deck, 'pptx'); await shareFile(toBlob(out.data, out.mime), `${baseName(app)}.pptx`, app.tab.title); },
   },
   {
@@ -519,7 +519,7 @@ def([
       toast('Presentation inspected and cleaned');
     },
   },
-  { id: 'file.encrypt', label: 'Encrypt with Password…', icon: 'enhanced_encryption', tab: 'Backstage', group: 'Info', noRecord: true, tip: 'Save an AES-256 encrypted QuillStage copy (.qspe)', run: (app) => saveTab(app, app.tab, { copy: true, format: 'qspe' }) },
+  { id: 'file.encrypt', label: 'Encrypt with Password…', icon: 'enhanced_encryption', tab: 'Backstage', group: 'Info', noRecord: true, tip: 'Save an AES-256 encrypted Anne\'s Stage copy (.qspe)', run: (app) => saveTab(app, app.tab, { copy: true, format: 'qspe' }) },
   {
     id: 'file.markFinal', label: 'Mark as Final', icon: 'verified', tab: 'Backstage', group: 'Info', kind: 'toggle', noRecord: true,
     tip: 'Make the presentation read-only so readers know it is finished',
@@ -600,7 +600,7 @@ def([
     id: 'file.options', label: 'Options…', icon: 'settings', tab: 'Backstage', group: 'Options', popular: true, noRecord: true,
     run: async (app) => {
       const p = app.prefs;
-      const r = await openDialog({ title: 'QuillStage Options', wide: true, fields: [
+      const r = await openDialog({ title: 'Anne\'s Stage Options', wide: true, fields: [
         { key: 'h1', type: 'heading', label: 'General' },
         { key: 'author', label: 'User name', type: 'text', value: p.author, half: true },
         { key: 'initials', label: 'Initials', type: 'text', value: p.initials, half: true },
@@ -678,7 +678,7 @@ def([
   {
     id: 'file.exportSettings', label: 'Export / Import Settings…', icon: 'import_export', tab: 'Backstage', group: 'Options', noRecord: true,
     run: async (app) => {
-      const r = await openDialog({ title: 'Settings Transfer', help: 'Copy this text to back up your Quick Access Bar, custom tabs, shortcuts, macros, AutoCorrect and preferences. Paste settings text here and choose Import to restore. The format is shared with QuillPen and QuillGrid; settings that do not apply to QuillStage are ignored.', fields: [{ key: 'json', label: 'Settings (JSON)', type: 'textarea', rows: 12, value: JSON.stringify({ ...app.prefs, recent: [] }, null, 1) }], ok: 'Import', buttons: [{ label: 'Copy', onClick: (x) => { navigator.clipboard?.writeText(x.json); toast('Copied'); } }] });
+      const r = await openDialog({ title: 'Settings Transfer', help: 'Copy this text to back up your Quick Access Bar, custom tabs, shortcuts, macros, AutoCorrect and preferences. Paste settings text here and choose Import to restore. The format is shared with Anne\'s Pen and Anne\'s Grid; settings that do not apply to Anne\'s Stage are ignored.', fields: [{ key: 'json', label: 'Settings (JSON)', type: 'textarea', rows: 12, value: JSON.stringify({ ...app.prefs, recent: [] }, null, 1) }], ok: 'Import', buttons: [{ label: 'Copy', onClick: (x) => { navigator.clipboard?.writeText(x.json); toast('Copied'); } }] });
       if (!r) return;
       let p: unknown;
       try { p = JSON.parse(r.json); } catch { /* reported below */ }

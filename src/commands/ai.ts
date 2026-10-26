@@ -40,7 +40,7 @@ export async function ensureAiReady(app: App, reason = 'This command needs an AI
   const ids = aiRecipients().filter((id) => cloudId(id) && !aiSettings().privacyAck.includes(id));
   if (!ids.length) return true;
   const free = ids.some((id) => providerById(id)?.free === 'free');
-  const ok = await confirmDialog('Sending Text to an AI Service', `AI commands send only the slide text they need directly from this device to ${names(ids)}. QuillStage has no server and keeps no copy. The service's terms and privacy policy apply${free ? ', and free tiers may use what you send to improve their models' : ''}. For confidential presentations, use the on-device model. Continue?`, 'Continue', 'Cancel');
+  const ok = await confirmDialog('Sending Text to an AI Service', `AI commands send only the slide text they need directly from this device to ${names(ids)}. Anne\'s Stage has no server and keeps no copy. The service's terms and privacy policy apply${free ? ', and free tiers may use what you send to improve their models' : ''}. For confidential presentations, use the on-device model. Continue?`, 'Continue', 'Cancel');
   if (ok) saveAiSettings((x) => { for (const id of ids) if (!x.privacyAck.includes(id)) x.privacyAck.push(id); });
   return ok;
 }
@@ -253,7 +253,7 @@ def([
     run: async () => {
       const p = providerById(aiSettings().active || '');
       await openDialog({ title: 'AI & Privacy', ok: 'Close', cancel: false, fields: [{ key: 'i', type: 'info', html: [
-        '<p><b>QuillStage has no server.</b> AI requests go directly from this device to the provider you choose, using your own key. Nothing is sent until you run an AI command.</p>',
+        '<p><b>Anne\'s Stage has no server.</b> AI requests go directly from this device to the provider you choose, using your own key. Nothing is sent until you run an AI command.</p>',
         `<p><b>Active provider:</b> ${p ? esc(p.name) : 'none'}${p && (p.kind === 'local' || p.kind === 'builtin') ? ' — runs on this device; your presentation does not leave it.' : p ? ' — the text a command needs (the selection, the slide, or the deck\'s text for whole-deck commands) is sent to this service; its terms apply.' : ''}</p>`,
         activeEnsemble() ? `<p><b>Several AIs are on.</b> Each AI command sends the same text to every one of these services: ${esc(names(aiRecipients()))}.</p>` : '',
         '<p><b>Pictures</b> are sent only by Generate Alt Text, and only the selected picture.</p>',
@@ -279,7 +279,7 @@ def([
 
   {
     id: 'ai.draftDeck', label: 'Draft Presentation', icon: 'auto_awesome_motion', tab: 'AI', group: 'Create', edits: true, popular: true, origin: 'Tome, Gamma',
-    tip: 'Describe a topic; the AI writes an outline you review, then QuillStage builds the slides',
+    tip: 'Describe a topic; the AI writes an outline you review, then Anne\'s Stage builds the slides',
     run: async (app) => {
       const r = await openDialog({ title: 'Draft Presentation', fields: [
         { key: 'topic', label: 'Topic or purpose', type: 'textarea', rows: 3, value: '' },

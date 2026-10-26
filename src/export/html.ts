@@ -105,7 +105,7 @@ export function deckToHtmlShow(deck: Deck, opts: { title?: string } = {}): strin
     plan.media = plan.media.map((m) => ({ ...m, src: '' }));
   });
   return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="QuillStage">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Anne\'s Stage">
 <title>${esc(title)}</title><style>:root{--r:${w / h}}${SHOW_CSS}</style></head>
 <body><main id="stage">${parts.join('\n')}</main>
 <div id="bar"><span id="count"></span> · Arrows or click to advance · N notes · G all slides</div>
@@ -141,7 +141,7 @@ export function deckToStory(deck: Deck, opts: { title?: string; notes?: boolean 
     return `<section id="slide-${i + 1}">${o.title ? `<h2>${esc(o.title)}</h2>` : ''}<figure role="img" aria-label="${esc(o.title || `Slide ${i + 1}`)}">${svg}<figcaption>Slide ${i + 1}</figcaption></figure>${body}${notes}</section>`;
   });
   return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="QuillStage">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Anne\'s Stage">
 <title>${esc(title)}</title><style>${STORY_CSS}</style></head>
 <body><header><h1>${esc(title)}</h1>${deck.data.props.author ? `<p>${esc(deck.data.props.author)}</p>` : ''}</header>
 <main>${sections.join('\n')}</main></body></html>

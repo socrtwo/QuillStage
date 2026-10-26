@@ -6,8 +6,9 @@
 /** @type {import('electron-builder').Configuration} */
 module.exports = {
   appId: 'io.github.socrtwo.quillstage',
-  productName: 'QuillStage',
-  copyright: 'QuillStage contributors, MIT License',
+  productName: 'Anne\'s Stage',
+  executableName: 'QuillStage', // the binary keeps its old name; the product (display) name is Anne's Stage
+  copyright: 'Anne\'s Stage contributors, MIT License',
   directories: { app: 'build/desktop-app', output: 'release', buildResources: 'resources' },
   artifactName: 'QuillStage-${version}-${os}-${arch}.${ext}',
   asar: true,
@@ -23,8 +24,8 @@ module.exports = {
     { ext: 'odp', name: 'OpenDocument Presentation', role: 'Editor', mimeType: 'application/vnd.oasis.opendocument.presentation' },
     { ext: 'fodp', name: 'Flat OpenDocument Presentation', role: 'Editor', mimeType: 'application/vnd.oasis.opendocument.flat-presentation' },
     { ext: 'md', name: 'Markdown Slides', role: 'Editor', mimeType: 'text/markdown' },
-    { ext: 'qsp', name: 'QuillStage Presentation', role: 'Editor', mimeType: 'application/x-quillstage' },
-    { ext: 'qspe', name: 'Encrypted QuillStage Presentation', role: 'Editor', mimeType: 'application/x-quillstage-encrypted' },
+    { ext: 'qsp', name: 'Anne\'s Stage Presentation', role: 'Editor', mimeType: 'application/x-quillstage' },
+    { ext: 'qspe', name: 'Encrypted Anne\'s Stage Presentation', role: 'Editor', mimeType: 'application/x-quillstage-encrypted' },
   ],
   win: {
     target: [{ target: 'nsis', arch: ['x64', 'arm64'] }, { target: 'portable', arch: ['x64'] }],
@@ -34,7 +35,7 @@ module.exports = {
   mac: {
     target: [{ target: 'dmg', arch: ['universal'] }, { target: 'zip', arch: ['universal'] }],
     category: 'public.app-category.productivity',
-    extendInfo: { CFBundleDisplayName: 'QuillStage' },
+    extendInfo: { CFBundleDisplayName: 'Anne\'s Stage' },
     // Ad-hoc signature: runs on Apple silicon without a paid Developer ID, but is not notarized,
     // so Gatekeeper asks once (docs/INSTALL.md). Hardened runtime would reject Electron's own signature.
     identity: '-',
@@ -45,7 +46,7 @@ module.exports = {
     target: [{ target: 'AppImage', arch: ['x64', 'arm64', 'armv7l'] }, { target: 'deb', arch: ['x64', 'arm64', 'armv7l'] }],
     category: 'Office;Presentation',
     synopsis: 'Presentation app with a complete, customizable command library',
-    description: 'QuillStage is an open-source presentation app that opens and saves PowerPoint (.pptx), OpenDocument (.odp) and Markdown slides. Every feature is a command you can put on the ribbon, the Quick Access Bar, a shortcut or a macro.',
+    description: 'Anne\'s Stage is an open-source presentation app that opens and saves PowerPoint (.pptx), OpenDocument (.odp) and Markdown slides. Every feature is a command you can put on the ribbon, the Quick Access Bar, a shortcut or a macro.',
     maintainer: 'socrtwo <socrtwo@users.noreply.github.com>',
     executableName: 'quillstage',
     syncDesktopName: true,

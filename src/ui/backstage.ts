@@ -104,7 +104,7 @@ export function renderBackstage(app: App, root: HTMLElement, page: string): void
       grid.appendChild(card('Story', 'A responsive scrolling web page', 'web_stories', () => app.exec('file.export.story')));
       grid.appendChild(card('Outline', 'Text, Markdown or RTF', 'format_list_bulleted', () => app.exec('file.export.outline')));
       grid.appendChild(card('Package Presentation', 'A ZIP with .pptx, .qsp, HTML show and PDF', 'inventory_2', () => app.exec('file.package')));
-      grid.appendChild(card('Encrypted QuillStage (.qspe)', 'AES-256 password protected', 'enhanced_encryption', () => app.exec('file.encrypt')));
+      grid.appendChild(card('Encrypted Anne\'s Stage (.qspe)', 'AES-256 password protected', 'enhanced_encryption', () => app.exec('file.encrypt')));
       grid.appendChild(card('Template', 'Reuse this design as a starting point', 'bookmark_add', () => app.exec('file.saveTemplate')));
       body.appendChild(grid);
       break;

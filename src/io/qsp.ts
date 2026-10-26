@@ -1,5 +1,5 @@
 /**
- * Native QuillStage formats.
+ * Native Anne's Stage formats.
  *   .qsp   ZIP package: `mimetype` (stored first), `deck.json` (the model) and `media/<id>` binaries.
  *   .qspe  the same JSON (media inline) encrypted with AES-256-GCM under a password-derived key.
  *   .json  the model as plain JSON (media inline, base64).
@@ -27,7 +27,7 @@ export async function exportQsp(deck: Deck): Promise<Uint8Array> {
 export async function importQsp(data: Uint8Array): Promise<Deck> {
   const zip = await JSZip.loadAsync(data);
   const f = zip.file('deck.json');
-  if (!f) throw new Error('This QuillStage package has no deck.json.');
+  if (!f) throw new Error('This Anne\'s Stage package has no deck.json.');
   const j = JSON.parse(await f.async('string'));
   const media: Record<string, any> = {};
   for (const [id, info] of Object.entries<any>(j.mediaIndex || {})) {

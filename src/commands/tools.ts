@@ -192,7 +192,7 @@ def([
       const alias = new Map<string, string>();
       for (const f of FACES) for (const a of f[1]) alias.set(a.toLowerCase(), f[0]);
       const check = (f: string) => { try { return (document as any).fonts?.check?.(`12px "${f}"`) ?? false; } catch { return false; } };
-      const rows = [...uses].sort((a, b) => b[1] - a[1]).map(([f, n]) => h('tr', null, h('td', null, f), h('td', null, `${n} run(s)`), h('td', null, bundled.has(f) ? 'Included with QuillStage' : alias.has(f.toLowerCase()) ? `Installed original, otherwise ${alias.get(f.toLowerCase())} (same metrics)` : check(f) ? 'Installed on this device' : 'Not available: a similar font is used')));
+      const rows = [...uses].sort((a, b) => b[1] - a[1]).map(([f, n]) => h('tr', null, h('td', null, f), h('td', null, `${n} run(s)`), h('td', null, bundled.has(f) ? 'Included with Anne\'s Stage' : alias.has(f.toLowerCase()) ? `Installed original, otherwise ${alias.get(f.toLowerCase())} (same metrics)` : check(f) ? 'Installed on this device' : 'Not available: a similar font is used')));
       await openDialog({ title: 'Fonts Used', wide: true, ok: 'Close', cancel: false, content: rows.length ? h('table', { class: 'ql-stats' }, ...rows) : h('p', null, 'No text in this presentation.') });
     },
   },
@@ -212,7 +212,7 @@ def([
   },
   {
     id: 'tools.notesToDoc', label: 'Speaker Notes to Script', icon: 'description', tab: 'Tools', group: 'Reports', edits: false, noRecord: true, isEnabled: hasSlides,
-    tip: 'Download the speaker notes as a script (Markdown, opens in QuillPen)',
+    tip: 'Download the speaker notes as a script (Markdown, opens in Anne\'s Pen)',
     run: (app) => {
       const md = app.deck.slides.map((s, i) => {
         const title = slideTitle(s) || `Slide ${i + 1}`;

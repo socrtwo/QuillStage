@@ -699,7 +699,7 @@ export class Shell {
 
   async tour(): Promise<void> {
     const steps = [
-      ['Everything is a command', 'Every feature of QuillStage is a command you can find with the search button (or Alt+Q), place on the Quick Access Bar, put on your own tab, assign a key, or record in a macro.'],
+      ['Everything is a command', 'Every feature of Anne\'s Stage is a command you can find with the search button (or Alt+Q), place on the Quick Access Bar, put on your own tab, assign a key, or record in a macro.'],
       ['Quick Access Bar', 'Tap ▾ at the end of the Quick Access Bar to add common commands, or choose More Commands… to pick from the full library. Long-press or right-click any ribbon button to add it. You can move the bar below the ribbon or to the bottom, near the keyboard.'],
       ['Slides', 'Add slides with New Slide (Ctrl+M). Click a placeholder to type. Drag thumbnails to reorder; right-click (or long-press) them for more. The Outline view lets you write the whole deck as an outline.'],
       ['Presenting', 'Present from the beginning with F5, or from the current slide with Shift+F5. With a second screen, Presenter View shows your notes, the next slide and a timer while the audience sees the slides. Press ? during the show for every key.'],

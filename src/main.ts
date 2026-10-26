@@ -1,4 +1,4 @@
-/** QuillStage entry point. */
+/** Anne's Stage entry point. */
 import 'material-symbols/outlined.css';
 import './styles/app.css';
 import './styles/show.css';

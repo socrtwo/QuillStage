@@ -35,7 +35,7 @@ An auto-hiding toolbar at the bottom left offers the same tools for mouse and to
 - **Timings.** Slides with *Advance after* move on by themselves unless *Use Timings* is off in Set Up Slide Show; remaining builds are spread over the slide's time. **Rehearse Timings** (`startShow(app, { rehearse: true })`) records the time spent on each slide and offers to keep them.
 - **Set Up Slide Show** settings honored: loop until Esc, kiosk (browsed at a kiosk: only links, Home, End and Esc), slide range, custom show, show without animation, show narration (media controls), pen and laser colors.
 - **Reduced motion.** When the system asks for reduced motion, transitions become cuts and animations take effect at once.
-- **Live subtitles** use the platform's speech recognition (`SpeechRecognition`) where the browser or WebView offers it; elsewhere QuillStage says that it is unavailable.
+- **Live subtitles** use the platform's speech recognition (`SpeechRecognition`) where the browser or WebView offers it; elsewhere Anne's Stage says that it is unavailable.
 - With **End with black slide** (`prefs.showEndBlack`), the show ends on a black screen: "End of slide show, click to exit."
 
 ## Presenter view
