@@ -74,7 +74,7 @@ export class App {
   private listeners = new Set<(app: App) => void>();
   lastCommand: { id: string; arg?: any } | null = null;
   keyIndex = new Map<string, string>();
-  /** Clipboard of slides and elements copied inside QuillStage. */
+  /** Clipboard of slides and elements copied inside Anne's Stage. */
   clip: { kind: 'elements' | 'slides'; data: any; media: Record<string, any>; text: string; time: number } | null = null;
   /** Format Painter: copied formatting, and whether it stays on. */
   painter: { fmt: any; sticky: boolean } | null = null;
