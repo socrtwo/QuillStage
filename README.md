@@ -4,7 +4,7 @@
 
 An original, open-source presentation app for Android, iOS, Windows, macOS, Linux, ChromeOS and the web whose goal is the same as the rest of the Anne's Office suite: **no missing commands**. Anne's Stage gives you a familiar slide workflow (outline, slide sorter, masters, transitions, animations, presenter view) and open and save .pptx and .odp files faithfully, then add the best ideas from forty years of presentation software: outline-driven authoring, a zoomable canvas mode, Markdown slides, build-order editing, rehearsal coaching, live polls and Q&A, and an optional AI tab that can run entirely on your device. Every feature is a command, and every command can be put on the Quick Access Bar, on your own tab, on a keyboard shortcut, or in a macro, and found with command search. When a presentation is damaged, Anne's Stage recovers what it can instead of refusing to open it.
 
-> **Status: first working version (0.1.0, milestone M1 with much of M2–M5).** The app builds for the web, Android, iOS and desktop with the same CI and release workflows as QuillGrid. What works today:
+> **Status: first working version (0.1.0, milestone M1 with much of M2–M5).** The app builds for the web, Android, iOS and desktop with the same CI and release workflows as Anne's Grid. What works today:
 >
 > - **556 commands**; 464 of the 755 ids in the plan are implemented, and the rest are listed in [docs/COMMANDS.md](docs/COMMANDS.md). A command is registered only when it works.
 > - **Editing:** placeholders inherit from layouts and masters; you type directly on the slide; 90+ preset shapes, pictures, tables, charts, diagrams, media, groups, ink; smart guides and snapping; undo/redo.
@@ -23,7 +23,7 @@ An original, open-source presentation app for Android, iOS, Windows, macOS, Linu
 - **Customize Tabs and Keyboard:** create tabs and groups, put any command in them, rename, reorder or hide built-in tabs, and rebind any command with conflict display. Layouts can be exported and imported.
 - **Innovations from other presentation software:** outline-first authoring with automatic layouts, a build-order panel, Smooth Morph transitions, zoom links and a zoomable canvas mode, Markdown and plain-text decks, vertical slide stacks, code slides with step-through highlighting, presenter rehearsal with timing and a rehearsal coach, live polls, word clouds, quizzes and audience Q&A, a phone remote, Pecha Kucha and Ignite timers, and more. Each idea is credited in [docs/INNOVATIONS.md](docs/INNOVATIONS.md).
 - **Presenter view** on a second screen (or the same screen on a phone) with notes, the next slide or build, a timer, a slide grid, pen, highlighter and laser pointer, and live subtitles.
-- **Export** to PDF (with or without build steps), images, video, animated GIF, handouts, a self-contained HTML show, a responsive scrolling story, and the outline to QuillPen.
+- **Export** to PDF (with or without build steps), images, video, animated GIF, handouts, a self-contained HTML show, a responsive scrolling story, and the outline to Anne's Pen.
 - **AI tab (optional).** Draft a deck from a prompt or a document, outline to slides, design ideas, speaker notes, rewrite and shorten text, alt text, translation and a rehearsal coach. A setup wizard covers free and paid providers, local servers, and a **free on-device model** that needs no account and works offline after one download. Several AIs can work on one request: one AI combines the others' answers, or they deliberate Quaker-style (unite, stand aside or block) until they agree. Nothing is sent anywhere until you run an AI command.
 - **Spelling in many languages.** Offline dictionaries for every variety of English, and a **Spelling Dictionaries** wizard that downloads freely licensed dictionaries for 90+ other languages when you need them.
 - **Corrupt-file recovery.** Damaged .pptx, .ppsx, .potx, .odp and .ppt files go through a recovery pipeline descended from the author's [Immortal Unzipper / Immortal Zip](https://socrtwo.github.io/Immortal-Zip/) and [Word Recovery](https://github.com/socrtwo/wordrecovery-SF) tools: file identification from the bytes, byte-level ZIP salvage, XML repair, slide-by-slide rebuilding, media harvesting and text scans. The recovered deck opens as a new, unsaved file with a report.
@@ -68,7 +68,7 @@ CI will type-check, test and build the web app and an APK on every push, and a *
 | **Anne's Post** | Email | https://github.com/socrtwo/QuillPost |
 | **Anne's Stage** | Presentations (this project) | https://github.com/socrtwo/QuillStage |
 
-The apps share one application shell: the command registry, Quick Access Bar, customizable tabs and keyboard, command search, macro recorder, AI setup wizard and providers, spelling dictionaries, recovery engine and platform layer. Anne's Stage plans to link charts from Anne's Grid workbooks, send outlines and handouts to Anne's Pen, and share decks through QuillPost.
+The apps share one application shell: the command registry, Quick Access Bar, customizable tabs and keyboard, command search, macro recorder, AI setup wizard and providers, spelling dictionaries, recovery engine and platform layer. Anne's Stage plans to link charts from Anne's Grid workbooks, send outlines and handouts to Anne's Pen, and share decks through Anne's Post.
 
 ## Documentation
 

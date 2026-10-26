@@ -124,7 +124,7 @@ as Markdown tables.
 - **.qsp:** a ZIP package with a stored `mimetype` (`application/x-quillstage`), `deck.json` (the
   model) and `media/<id>` entries. Lossless.
 - **.qspe:** the same model encrypted with AES-256-GCM under a PBKDF2-SHA256 key (310,000
-  iterations, random salt and IV), as in Anne's Pen and QuillGrid. The password is never stored.
+  iterations, random salt and IV), as in Anne's Pen and Anne's Grid. The password is never stored.
 - **.json:** the model with media inline (base64), for scripts and diffs.
 
 ## Tests
